@@ -1,0 +1,45 @@
+* {
+    box-sizing: inherit;
+    margin: 0;
+    padding: 0;
+}
+
+img {
+    box-sizing: border-box;
+}
+
+@font-face {
+    font-family: 'Segoe UI';
+    src: url('path-to-font/segoeui.ttf') format('truetype'), url('path-to-font/segoeui.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+html {
+    font-size: 62.5%;
+    box-sizing: border-box;
+    line-height: 1.6rem;
+    font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+.grid {
+    width: 100%;
+    max-width: 1280px;
+    /* padding: 0 43px; */
+}
+
+.grid__fullwidth {
+    width: 100%;
+}
+
+.grid__row {
+    display: flex;
+}
+
+.grid__column-content {
+    width: 66.6667%;
+}
+
+.grid__column-content-navbar {
+    width: 33.3333%;
+}
