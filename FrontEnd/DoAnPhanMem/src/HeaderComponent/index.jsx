@@ -1,5 +1,6 @@
 import React from 'react'
 import "./index.css"
+import Logo from "/src/assets/img/logo.png"
 
 const index = () => {
   return (
@@ -42,7 +43,7 @@ const index = () => {
         </div>
         <div class="logo">
             <a href="" class="logo-link">
-                <img src="/src/assets/img/logo.png" alt=""/>
+                <img src={Logo} alt=""/>
             </a>
         </div>
         <div class="navbar">
