@@ -3,7 +3,8 @@ import Header from "./HeaderComponent";
 import Footer from "./FooterComponent";
 import Login from "./LoginComponent";
 import Schedule from "./ScheduleComponent";  
-import AddSchedule from "./AddScheduleComponent";
+import AddSchedule from "./ScheduleComponent/AddScheduleComponent";
+import EditSchedule from "./ScheduleComponent/EditScheduleComponent";
 const App = () => {
   return (
     <Router>
@@ -13,6 +14,7 @@ const App = () => {
         <Route path="/" element={<Login />} />
         <Route path="/schedule" element={<Schedule />} />
         <Route path="/addschedule" element={<AddSchedule />} />
+        <Route path="/editschedule" element={<EditSchedule />} />
       </Routes>
 
       <Footer />

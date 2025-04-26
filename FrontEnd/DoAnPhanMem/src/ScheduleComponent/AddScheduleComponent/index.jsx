@@ -1,23 +1,10 @@
 import React from 'react';
 import './indexAdd.css';
-
+import NavSchedule from "../NavScheduleComponent/nav.jsx";
 const AddSchedule = () => {
     return(
             <div className="container_schedule">
-              {/* Sidebar */}
-              <div className="sidebar">
-                <div className="profile">
-                  <img src="/avatar.jpg" alt="avatar" />
-                  <p>Xin chào,</p>
-                  <h4>Nguyễn Thị Huyền Thương</h4>
-                </div>
-                <div className="menu">
-                  <button>Thông tin cá nhân</button>
-                  <button>Quản lý lớp thực hành</button>
-                  <button>Duyệt yêu cầu đổi lịch</button>
-                  <button>Đăng xuất</button>
-                </div>
-              </div>
+                <NavSchedule></NavSchedule>
         
               {/* Content */}
               <div className="content">
@@ -44,6 +31,7 @@ const AddSchedule = () => {
                         <div className="form_group">
                             <label>Học kỳ:</label>
                             <select>
+                            <option>124</option>
                             <option>224</option>
                             </select>
                         </div>
@@ -51,27 +39,32 @@ const AddSchedule = () => {
                         <div className="form_group">
                             <label>Thứ:</label>
                             <select>
-                            <option>224</option>
+                            <option>2</option>
+                            <option>3</option>
                             </select>
                         </div>
 
                         <div className="form_group">
                             <label>Từ tiết:</label>
                             <select>
-                            <option>224</option>
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
                             </select>
                         </div>
 
                         <div className="form_group">
                             <label>Đến tiết:</label>
                             <select>
-                            <option>224</option>
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
                             </select>
                         </div>
                         </div>
 
                         {/* Cột phải */}
-                        <div className="form_column1">
+                        <div className="form_column">
                         <div className="form_group">
                             <label>Ngày hiệu lực:</label>
                             <input type="date" />

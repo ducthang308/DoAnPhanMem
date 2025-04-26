@@ -1,24 +1,13 @@
 import React from 'react';
 import './index.css';
+import NavSchedule from "./NavScheduleComponent/nav.jsx";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPenToSquare, faTrash } from '@fortawesome/free-solid-svg-icons';
 const Schedule = () => {
   return (
     <div className="container_schedule">
       {/* Sidebar */}
-      <div className="sidebar">
-        <div className="profile">
-          <img src="/avatar.jpg" alt="avatar" />
-          <p>Xin chào,</p>
-          <h4>Nguyễn Thị Huyền Thương</h4>
-        </div>
-        <div className="menu">
-          <button>Thông tin cá nhân</button>
-          <button>Quản lý lớp thực hành</button>
-          <button>Duyệt yêu cầu đổi lịch</button>
-          <button>Đăng xuất</button>
-        </div>
-      </div>
+      <NavSchedule></NavSchedule>
 
       {/* Content */}
       <div className="content">
