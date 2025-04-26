@@ -1,14 +1,15 @@
 import React from 'react'
 import "./index.css"
 import Navbar from "./NavbarComponent/navbar.jsx"
-import Acoount from "./AccountManagementComponent/account.jsx"
+import Account from "./AccountComponent/AddAccountComponent/account.jsx"
+import Management from './AccountComponent/ManagementComponent/management.jsx'
 
 const index = () => {
   return (
     <div class="content">
       <div class="container-content">
           <Navbar></Navbar>
-          <Acoount></Acoount>
+          <Management></Management>
       </div>
     </div>
   )
