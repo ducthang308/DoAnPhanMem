@@ -1,11 +1,8 @@
 import React from 'react';
-import './indexAdd.css';
-import NavSchedule from "../NavScheduleComponent/nav.jsx";
+import './/indexAdd.css';
 const AddSchedule = () => {
     return(
             <div className="container_schedule">
-                <NavSchedule></NavSchedule>
-        
               {/* Content */}
               <div className="content">
                 {/* Search Bar */}

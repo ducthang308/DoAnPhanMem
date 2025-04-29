@@ -3,8 +3,8 @@ import Header from "./HeaderComponent";
 import Footer from "./FooterComponent";
 import Login from "./LoginComponent";
 import Schedule from "./ScheduleComponent";  
-import AddSchedule from "./ScheduleComponent/AddScheduleComponent";
-import EditSchedule from "./ScheduleComponent/EditScheduleComponent";
+import AddSchedule from "./AddScheduleContentComponent";
+import EditSchedule from "./EditScheduleComponent";
 const App = () => {
   return (
     <Router>

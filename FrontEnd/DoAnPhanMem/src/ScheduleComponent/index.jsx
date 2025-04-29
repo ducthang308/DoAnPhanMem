@@ -1,6 +1,6 @@
 import React from 'react';
 import './index.css';
-import NavSchedule from "./NavScheduleComponent/nav.jsx";
+import NavSchedule from "../NavScheduleComponent/nav.jsx";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPenToSquare, faTrash } from '@fortawesome/free-solid-svg-icons';
 const Schedule = () => {
