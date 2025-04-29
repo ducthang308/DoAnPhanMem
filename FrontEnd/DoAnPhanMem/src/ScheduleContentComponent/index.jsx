@@ -1,14 +1,14 @@
 import React from 'react'
 import "./index.css"
 import NavSchedule from "../NavScheduleComponent/nav.jsx";
-import AddSchedule from "./AddScheduleComponent/index.jsx";
+import Schedule from './ScheduleComponent/index.jsx';
 
 const index = () => {
   return (
     <div class="content">
       <div class="container-content">
           <NavSchedule></NavSchedule>
-          <AddSchedule></AddSchedule>
+          <Schedule></Schedule>
       </div>
     </div>
   )

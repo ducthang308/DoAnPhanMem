@@ -1,10 +1,10 @@
 import React from 'react';
-import './/indexAdd.css';
+import './indexAdd.css';
 const AddSchedule = () => {
     return(
             <div className="container_schedule">
               {/* Content */}
-              <div className="content">
+              <div className="content_schedule">
                 {/* Search Bar */}
                 <div className="search-bar">
                   <input type="text" placeholder="Tìm kiếm" />

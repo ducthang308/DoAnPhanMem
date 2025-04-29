@@ -1,13 +1,12 @@
 import React from 'react';
 import './indexEdit.css';
-import NavSchedule from "../NavScheduleComponent/nav.jsx";
+
 const EditSchedule = () => {
     return(
             <div className="container_schedule">
-                <NavSchedule></NavSchedule>
         
               {/* Content */}
-              <div className="content">
+              <div className="content_schedule">
                 {/* Search Bar */}
                 <div className="search-bar">
                   <input type="text" placeholder="Tìm kiếm" />

@@ -2,9 +2,9 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from "./HeaderComponent";
 import Footer from "./FooterComponent";
 import Login from "./LoginComponent";
-import Schedule from "./ScheduleComponent";  
+import Schedule from "./ScheduleContentComponent";  
 import AddSchedule from "./AddScheduleContentComponent";
-import EditSchedule from "./EditScheduleComponent";
+import EditSchedule from "./EditScheduleContentComponent";
 const App = () => {
   return (
     <Router>

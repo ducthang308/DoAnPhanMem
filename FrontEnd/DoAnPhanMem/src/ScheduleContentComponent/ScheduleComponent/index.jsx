@@ -1,16 +1,13 @@
 import React from 'react';
 import './index.css';
-import NavSchedule from "../NavScheduleComponent/nav.jsx";
+import NavSchedule from "../../NavScheduleComponent/nav.jsx";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPenToSquare, faTrash } from '@fortawesome/free-solid-svg-icons';
 const Schedule = () => {
   return (
     <div className="container_schedule">
-      {/* Sidebar */}
-      <NavSchedule></NavSchedule>
-
       {/* Content */}
-      <div className="content">
+      <div className="content_schedule">
         {/* Search Bar */}
         <div className="search-bar">
           <input type="text" placeholder="Tìm kiếm" />
