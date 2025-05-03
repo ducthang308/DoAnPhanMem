@@ -7,12 +7,10 @@ import com.Backend.DoAnPhanMem.Services.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -51,6 +49,24 @@ public class UserController {
             return ResponseEntity.ok(responseDTO);
         } catch (Exception e) {
             return ResponseEntity.badRequest().body("Login failed: " + e.getMessage());
+        }
+    }
+
+    @GetMapping("")
+    @PreAuthorize("hasRole('ROLE_Admin')")
+    public ResponseEntity<?> getAllUsers(){
+        List<Users> users = userService.getAllUsers();
+        return ResponseEntity.ok(users);
+    }
+
+    @PutMapping("/active/{id}")
+    @PreAuthorize("hasRole('ROLE_Admin')")
+    public ResponseEntity<?> updateActive(@PathVariable("id") Long id, @Valid @RequestBody LoginResponse loginResponse) {
+        try {
+            Users users = userService.updateActive(loginResponse, id);
+            return ResponseEntity.ok(users);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
 }

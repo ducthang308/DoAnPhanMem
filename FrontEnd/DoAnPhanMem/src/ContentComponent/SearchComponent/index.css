@@ -1,0 +1,16 @@
+.search-add {
+    display: flex;
+}
+  
+.search-box {
+    display: flex;
+    align-items: center;
+}
+  
+.search-box input {
+    padding: 8px;
+    border: 2px solid #d0baff;
+    border-radius: 4px 0 0 4px;
+    outline: none;
+    width: 300px;
+}

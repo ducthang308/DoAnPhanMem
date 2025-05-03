@@ -1,6 +1,8 @@
 import React from 'react'
 import "./index.css"
 import Logo from "/src/assets/img/logo.png"
+import AddButton from "../../ButtonComponent/add.jsx"
+import Search from "../../SearchComponent/search.jsx"
 const users = [
     {
       name: "Nguyễn Huyền Thương",
@@ -30,16 +32,13 @@ const users = [
 const management = () => {
   return (
     <div class="container-account">
-        <div class="search-add">
-            <div class="search-box">
-            <input type="text" placeholder="Tìm kiếm"/>
-            <button><i class="fas fa-search"></i></button>
-            </div>
-            <button class="add-button"><i class="fas fa-user-plus"></i> Thêm</button>
-        </div>
+        <Search></Search>
         
         <div className="management">
-            <h2>Danh sách tài khoản người dùng</h2>
+          <div className="container-management">
+            <h2 class="title">Danh sách tài khoản người dùng</h2>
+            <AddButton></AddButton>
+          </div>
             <table>
                 <thead>
                 <tr>

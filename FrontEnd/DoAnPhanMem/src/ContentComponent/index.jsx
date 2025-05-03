@@ -1,7 +1,7 @@
 import React from 'react'
 import "./index.css"
 import Navbar from "./NavbarComponent/navbar.jsx"
-import Account from "./AccountComponent/AddAccountComponent/account.jsx"
+import AddAccount from "./AccountComponent/AddAccountComponent/account.jsx"
 import Management from './AccountComponent/ManagementComponent/management.jsx'
 
 const index = () => {
@@ -9,7 +9,7 @@ const index = () => {
     <div class="content">
       <div class="container-content">
           <Navbar></Navbar>
-          <Management></Management>
+          <Management></Management> 
       </div>
     </div>
   )

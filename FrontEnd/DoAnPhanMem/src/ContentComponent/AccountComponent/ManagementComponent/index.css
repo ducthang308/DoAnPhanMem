@@ -7,7 +7,6 @@
   
 .search-add {
     display: flex;
-    justify-content: space-between;
 }
   
 .search-box {
@@ -22,34 +21,18 @@
     outline: none;
     width: 300px;
 }
-  
-.search-box button {
-    padding: 8px 12px;
-    background-color: white;
-    border: 2px solid #d0baff;
-    border-left: none;
-    border-radius: 0 4px 4px 0;
-    cursor: pointer;
-}
-  
-.search-box button i {
-    color: black;
-}
-  
-.add-button {
-    padding: 8px 16px;
-    background-color: #28a745;
-    color: white;
-    border-radius: 6px;
-    cursor: pointer;
-    font-weight: bold;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-  
-.management{
 
+.container-management{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.title{
+    flex: 1;
+    color: black;
+    font-weight: 500;
+    font-size: 24px;
 }
 
 table {

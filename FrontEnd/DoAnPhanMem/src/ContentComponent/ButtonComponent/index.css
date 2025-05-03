@@ -1,0 +1,23 @@
+.add-button, .update-button, .delete-button {
+    padding: 8px 16px;
+    color: white;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+}
+
+.add-button{
+    background-color: #28a745;
+}
+
+.delete-button{
+    background-color: #FF6262;
+}
+
+.update-button{
+    background-color: #F7C76F;
+}

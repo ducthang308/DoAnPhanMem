@@ -39,7 +39,8 @@ public class WebSecurityConfig {
                                     String.format("%s/user/login", apiPrefix)
                             )
                             .permitAll()
-                            .requestMatchers("/ws/**").permitAll();
+                            .requestMatchers("/ws/**").permitAll()
+                            .anyRequest().authenticated();
                 })
                 .csrf(AbstractHttpConfigurer::disable);
         //http.securityMatcher(String.valueOf(EndpointRequest.toAnyEndpoint()));
