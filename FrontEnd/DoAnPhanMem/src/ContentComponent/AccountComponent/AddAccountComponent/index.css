@@ -58,7 +58,7 @@ select {
     text-align: center;
 }
   
-button {
+.button-submit {
     background-color: #28a745;
     border: none;
     color: white;
@@ -69,6 +69,6 @@ button {
     transition: background-color 0.3s ease;
 }
   
-button:hover {
+.button-submit:hover {
     background-color: #218838;
 }

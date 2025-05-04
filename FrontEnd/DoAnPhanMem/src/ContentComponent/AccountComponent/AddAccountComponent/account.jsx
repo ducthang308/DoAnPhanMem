@@ -33,7 +33,7 @@ const account = () => {
                 </div>
 
                 <div class="form-group center">
-                    <button type="submit">Lưu</button>
+                    <button type="submit" class="button-submit">Lưu</button>
                 </div>
             </form>
         </div>

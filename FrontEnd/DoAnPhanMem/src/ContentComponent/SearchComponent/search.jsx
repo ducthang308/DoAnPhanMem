@@ -6,7 +6,7 @@ const search = () => {
     <div class="search-add">
         <div class="search-box">
             <input type="text" placeholder="Tìm kiếm"/>
-            <button><i class="fas fa-search"></i></button>
+            <button class="button-search"><i class="fas fa-search"></i></button>
         </div>
     </div>
   )
