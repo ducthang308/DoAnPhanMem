@@ -3,7 +3,16 @@ import './index.css';
 import NavSchedule from "../../NavScheduleComponent/nav.jsx";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPenToSquare, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { useNavigate } from 'react-router-dom';
 const Schedule = () => {
+  const navigate = useNavigate();
+
+  const handleAddClick = () => {
+    navigate('/addschedule');
+  };
+  const handleEditClick = () => {
+    navigate('/editschedule');
+  };
   return (
     <div className="container_schedule">
       {/* Content */}
@@ -33,7 +42,7 @@ const Schedule = () => {
         </div>
 
         {/* Add Schedule Button */}
-        <button className="add-button">+ Thêm lịch</button>
+        <button className="add-button" onClick={handleAddClick}>+ Thêm lịch</button>
 
         {/* Table */}
         <table className="schedule-table">
@@ -64,7 +73,7 @@ const Schedule = () => {
                 <td>03/02/2025</td>
                 <td>-</td>
                 <td>
-                <button className="edit-btn">
+                <button className="edit-btn" onClick={() => navigate("/editschedule")}>
                     <FontAwesomeIcon icon={faPenToSquare} style={{ color: "#FFD43B" }} />
                 </button>
                 <button className="delete-btn">
