@@ -3,21 +3,21 @@ import "./index.css"
 
 const account = () => {
   return (
-    <div class="content-main">
-        <div class="form-container">
+    <div className="content-main">
+        <div className="form-container">
             <h2>Thêm tài khoản người dùng</h2>
-            <form class="form-account">
-                <div class="form-group">
+            <form className="form-account">
+                <div className="form-group">
                     <label for="fullname">Họ tên:</label>
                     <input type="text" id="fullname" placeholder="Nhập họ và tên:"/>
                 </div>
 
-                <div class="form-group">
+                <div className="form-group">
                     <label for="username">Mã người dùng:</label>
                     <input type="text" id="username" placeholder="Nhập mã người dùng:"/>
                 </div>
 
-                <div class="form-group">
+                <div className="form-group">
                     <label for="role">Vai trò:</label>
                     <select id="role">
                         <option value="sinhvien">Sinh viên</option>
@@ -26,13 +26,13 @@ const account = () => {
                     </select>
                 </div>
 
-                <div class="form-group status-group">
+                <div className="form-group status-group">
                     <label>Trạng thái:</label>
                     <label><input type="radio" name="status" value="active" checked/> Hoạt động</label>
                     <label><input type="radio" name="status" value="locked"/> Khóa</label>
                 </div>
 
-                <div class="form-group center">
+                <div className="form-group center">
                     <button type="submit">Lưu</button>
                 </div>
             </form>

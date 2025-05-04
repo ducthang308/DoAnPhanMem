@@ -4,15 +4,15 @@ import Logo from "/src/assets/img/logo.png"
 
 const navbar = () => {
   return (
-    <div class="content-navbar">
-        <div class="profile">
+    <div className="content-navbar">
+        <div className="profile">
             <img src={Logo} alt="Avatar"/>
-            <div class="profile-text">
+            <div className="profile-text">
                 <p>Xin chào,</p>
                 <h3>Nguyễn Thị Huyền Thương</h3>
             </div>
         </div>
-        <div class="menu">
+        <div className="menu">
             <a href="#">Thông tin cá nhân</a>
             <a href="#">Quản lý người dùng</a>
             <a href="#">Đăng xuất</a>
