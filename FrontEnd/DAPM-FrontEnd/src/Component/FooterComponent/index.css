@@ -1,0 +1,102 @@
+.footer{
+    background: #3782f5;
+    display: block;
+}
+
+.container-footer{
+    width: 100%;
+    height: 100%;
+}
+
+.container-content{
+    max-width: 1200px;
+    margin: 0 auto;
+    height: 100%;
+    padding: 8px 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+}
+
+.information{
+    display: flex;
+    gap: 50px;
+}
+
+.title{
+    color: #fff;
+    font-size: 20px;
+    font-weight: 500;
+    text-transform: capitalize;
+}
+
+.footer-list{
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    font-size: 14px;
+    color: #fff;
+    font-weight: 400;
+    line-height: 16px;
+    gap: 5px;
+    padding: 0;
+}
+
+.footer-item{
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.social{
+    display: flex;
+    flex-direction: column;
+    /* height: 169px; */
+}
+
+.title-center{
+    text-align: center;
+}
+
+.social-list{
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    font-size: 16px;
+    gap: 20px;
+    padding: 0;
+}
+
+.social-network{
+    color: #333333;
+    font-weight: 300;
+}
+
+.social-circle li a {
+    text-decoration: none;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    font-size: 15px;
+    background: #fff;
+}
+
+.social-list a.facebook, a.youtube, a.twitter {
+    transition: background-color 0.3s ease;
+}
+
+.social-list a.facebook:hover {
+    background-color: #1da1f2;
+}
+
+.social-list a.youtube:hover {
+    background-color: #ff0000;
+}
+
+.social-list a.twitter:hover {
+    background-color: #00aced;
+}
