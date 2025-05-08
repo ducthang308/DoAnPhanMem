@@ -9,9 +9,7 @@ import AppRouter from './Router/AppRouter';
 const App = () => {
   return (
     <>
-      <Header />
       <AppRouter />
-      <Footer />
     </>
   );
 }
