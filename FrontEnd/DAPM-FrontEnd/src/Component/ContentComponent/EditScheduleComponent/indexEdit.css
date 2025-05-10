@@ -3,6 +3,7 @@
     background-color: #f5f5f5;
     max-width: 1200px;
     padding: 40px 0;
+    flex: 1;
   }
  
   /* Content */
@@ -65,6 +66,7 @@
     border: 1px solid #ccc;
     border-radius: 6px;
     font-size: 14px;        
+    background-color: #e6f4ff;
   }
   
   .form-submit {
