@@ -60,21 +60,18 @@ tbody td img {
     color: red;
 }
 
-  
+
+.actions-red {
+  color: red;
+}
+
+.actions-green {
+  color: green;
+}
+
 td.actions i {
     padding: 0 8px;
     cursor: pointer;
     font-size: 18px;
-}
-  
-i.edit {
-    color: #f0ad4e;
-}
-  
-i.delete {
-    color: #d9534f;
-}
-  
-i.lock {
-    color: gray;
+    padding: 20px;
 }
