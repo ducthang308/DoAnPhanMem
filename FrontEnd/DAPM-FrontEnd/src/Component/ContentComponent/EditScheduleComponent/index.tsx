@@ -2,42 +2,21 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useParams, useNavigate } from 'react-router-dom';
 import './indexEdit.css';
-
-interface Semester {
-  id: number;
-  name: string;
-  semesterName: string;
-}
-
-interface Teacher {
-  id: number;
-  fullName: string;
-}
-
-interface PracticeScheduleDTO {
-  classCode: string;
-  subject: string;
-  date: number;
-  fromPeriod: number;
-  toPeriod: number;
-  effectiveDate: string;
-  notes: string;
-  semesterId: number;
-  userId: number;
-  roomId: number;
-}
+import type { PracticeScheduleForm, Semester, Teacher } from '../../../Types/PracticeSchedule.ts';
 
 const EditSchedule = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const token = localStorage.getItem("token"); 
+  const token = localStorage.getItem("token");
 
   const [semesters, setSemesters] = useState<Semester[]>([]);
   const [teachers, setTeachers] = useState<Teacher[]>([]);
-  const [formData, setFormData] = useState<PracticeScheduleDTO>({
+  const [selectedYear, setSelectedYear] = useState<string>('');
+
+  const [formData, setFormData] = useState<PracticeScheduleForm>({
     classCode: '',
     subject: '',
-    date: 2,
+    date: '2',
     fromPeriod: 1,
     toPeriod: 1,
     effectiveDate: '',
@@ -70,10 +49,20 @@ const EditSchedule = () => {
             },
           }),
         ]);
-
+        const scheduleData = scheduleRes.data;
+        if (scheduleData.effectiveDate) {
+        scheduleData.effectiveDate = scheduleData.effectiveDate.split('T')[0]; 
+        }
+        setFormData(scheduleData);
         setFormData(scheduleRes.data);
         setSemesters(semestersRes.data);
         setTeachers(teachersRes.data);
+
+        // Tìm năm học từ semesterId để set selectedYear
+        const currentSemester = semestersRes.data.find((s: Semester) => s.id === scheduleRes.data.semesterId);
+        if (currentSemester) {
+          setSelectedYear(currentSemester.name);
+        }
       } catch (err) {
         console.error('Lỗi khi tải dữ liệu:', err);
         alert('Không thể tải dữ liệu. Kiểm tra đăng nhập hoặc quyền truy cập.');
@@ -85,12 +74,25 @@ const EditSchedule = () => {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: ['date', 'fromPeriod', 'toPeriod', 'semesterId', 'userId', 'roomId'].includes(name)
-        ? parseInt(value)
-        : value,
-    }));
+
+    if (name === 'year') {
+      setSelectedYear(value);
+      const firstSemester = semesters.find(s => s.name === value);
+      setFormData(prev => ({
+        ...prev,
+        semesterId: firstSemester ? firstSemester.id : 0,
+      }));
+    } else if (['date', 'fromPeriod', 'toPeriod', 'semesterId', 'userId', 'roomId'].includes(name)) {
+      setFormData(prev => ({
+        ...prev,
+        [name]: parseInt(value),
+      }));
+    } else {
+      setFormData(prev => ({
+        ...prev,
+        [name]: value,
+      }));
+    }
   };
 
   const handleSubmit = async () => {
@@ -120,24 +122,27 @@ const EditSchedule = () => {
 
         <div className="form_container">
           <div className="form_wrapper">
-
             {/* Cột trái */}
             <div className="form_column">
               <div className="form_group">
                 <label>Năm học:</label>
-                <select name="semesterId" value={formData.semesterId} onChange={handleChange}>
-                  {semesters.map(s => (
-                    <option key={s.id} value={s.id}>{s.name}</option>
+                <select name="year" value={selectedYear} onChange={handleChange}>
+                  <option value="">-- Chọn năm học --</option>
+                  {Array.from(new Set(semesters.map(s => s.name))).map(year => (
+                    <option key={year} value={year}>{year}</option>
                   ))}
                 </select>
               </div>
 
               <div className="form_group">
                 <label>Học kỳ:</label>
-                <select>
-                  {semesters.filter(s => s.id === formData.semesterId).map(s => (
-                    <option key={s.id}>{s.semesterName}</option>
-                  ))}
+                <select name="semesterId" value={formData.semesterId} onChange={handleChange}>
+                  <option value="">-- Chọn học kỳ --</option>
+                  {semesters
+                    .filter(s => s.name === selectedYear)
+                    .map(s => (
+                      <option key={s.id} value={s.id}>{s.semesterName}</option>
+                    ))}
                 </select>
               </div>
 
@@ -145,7 +150,7 @@ const EditSchedule = () => {
                 <label>Thứ:</label>
                 <select name="date" value={formData.date} onChange={handleChange}>
                   {[2, 3, 4, 5, 6, 7].map(d => (
-                    <option key={d} value={d}>{d}</option>
+                    <option key={d} value={d}>Thứ {d}</option>
                   ))}
                 </select>
               </div>
@@ -153,8 +158,8 @@ const EditSchedule = () => {
               <div className="form_group">
                 <label>Từ tiết:</label>
                 <select name="fromPeriod" value={formData.fromPeriod} onChange={handleChange}>
-                  {[1, 2, 3, 4, 5, 6, 7, 8, 9].map(p => (
-                    <option key={p} value={p}>{p}</option>
+                  {Array.from({ length: 15 }, (_, i) => i + 1).map(p => (
+                    <option key={p} value={p}>Tiết {p}</option>
                   ))}
                 </select>
               </div>
@@ -162,8 +167,8 @@ const EditSchedule = () => {
               <div className="form_group">
                 <label>Đến tiết:</label>
                 <select name="toPeriod" value={formData.toPeriod} onChange={handleChange}>
-                  {[1, 2, 3, 4, 5, 6, 7, 8, 9].map(p => (
-                    <option key={p} value={p}>{p}</option>
+                  {Array.from({ length: 15 }, (_, i) => i + 1).map(p => (
+                    <option key={p} value={p}>Tiết {p}</option>
                   ))}
                 </select>
               </div>
@@ -179,6 +184,7 @@ const EditSchedule = () => {
               <div className="form_group">
                 <label>Giảng viên:</label>
                 <select name="userId" value={formData.userId} onChange={handleChange}>
+                  <option value="">-- Chọn giảng viên --</option>
                   {teachers.map(t => (
                     <option key={t.id} value={t.id}>{t.fullName}</option>
                   ))}

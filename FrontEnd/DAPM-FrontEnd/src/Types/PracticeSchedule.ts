@@ -20,3 +20,27 @@ export interface PracticeSchedule {
     roomName: string;
   };
 }
+
+export interface Semester {
+  id: number;
+  name: string;
+  semesterName: string;
+}
+
+export interface Teacher {
+  id: number;
+  fullName: string;
+}
+
+export interface PracticeScheduleForm {
+  classCode: string;
+  subject: string;
+  date: string;
+  fromPeriod: number;
+  toPeriod: number;
+  effectiveDate: string;
+  notes: string;
+  semesterId: number;
+  userId: number;
+  roomId: number;
+}

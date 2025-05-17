@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import './indexAdd.css';
+import type { Semester } from '../../../Types/PracticeSchedule.ts';
+import { useNavigate } from 'react-router-dom';
 
 const AddSchedule = () => {
-    const [semesters, setSemesters] = useState([]);
-    const [teachers, setTeachers] = useState([]);
-
-    const [formData, setFormData] = useState({
+  const navigate = useNavigate();
+  const [semesters, setSemesters] = useState<Semester[]>([]);
+  const [teachers, setTeachers] = useState([]);
+  const [selectedYear, setSelectedYear] = useState<string>('');
+  const [formData, setFormData] = useState({
     semesterId: '',
     semesterName: '',
     dayOfWeek: '',
@@ -17,56 +20,69 @@ const AddSchedule = () => {
     className: '',
     subjectName: '',
     note: ''
-    });
+  });
 
-    useEffect(() => {
+  useEffect(() => {
     const fetchData = async () => {
-        try {
+      try {
         const token = localStorage.getItem("token");
         if (!token) {
-            console.warn("No token found");
-            return;
+          console.warn("No token found");
+          return;
         }
 
         const [semestersRes, teachersRes] = await Promise.all([
-            axios.get("/api/v1/semesters", {
+          axios.get("/api/v1/semesters", {
             headers: {
-                Authorization: `Bearer ${token}`,
-                "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+              "Content-Type": "application/json",
             }
-            }),
-            axios.get("/api/v1/user/teachers", {
+          }),
+          axios.get("/api/v1/user/teachers", {
             headers: {
-                Authorization: `Bearer ${token}`,
-                "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+              "Content-Type": "application/json",
             }
-            })
+          })
         ]);
 
         setSemesters(semestersRes.data);
         setTeachers(teachersRes.data);
-        } catch (error) {
+      } catch (error) {
         console.error("Error fetching data:", error);
-        }
+      }
     };
 
     fetchData();
-    }, []);
+  }, []);
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
-    };
 
-    const handleSubmit = async () => {
+    if (name === 'year') {
+      setSelectedYear(value);
+      setFormData(prev => ({ ...prev, semesterId: '', semesterName: '' }));
+    } else if (name === 'semesterId') {
+      const selectedSemester = semesters.find(s => s.id.toString() === value);
+      setFormData(prev => ({
+        ...prev,
+        semesterId: value,
+        semesterName: selectedSemester?.semesterName || '',
+      }));
+    } else {
+      setFormData(prev => ({ ...prev, [name]: value }));
+    }
+  };
+
+  const handleSubmit = async () => {
     try {
-        const token = localStorage.getItem("token");
-        if (!token) {
+      const token = localStorage.getItem("token");
+      if (!token) {
         alert("Bạn chưa đăng nhập.");
         return;
-        }
+      }
 
-        const postData = {
+      const postData = {
         classCode: formData.className,
         subject: formData.subjectName,
         date: formData.dayOfWeek,
@@ -76,24 +92,23 @@ const AddSchedule = () => {
         notes: formData.note,
         semesterId: Number(formData.semesterId),
         userId: Number(formData.userId),
-        roomId: 1   // roomId mặc định là 1
-        };
+        roomId: 1
+      };
 
-        await axios.post("/api/v1/schedule/add", postData, {
+      await axios.post("/api/v1/schedule/add", postData, {
         headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
         }
-        });
+      });
 
-        alert("Thêm lịch thực hành thành công!");
+      alert("Thêm lịch thực hành thành công!");
+      navigate('/schedule');
     } catch (error) {
-        console.error("Lỗi khi thêm lịch thực hành:", error);
-        alert("Có lỗi xảy ra khi thêm lịch thực hành.");
+      console.error("Lỗi khi thêm lịch thực hành:", error);
+      alert("Có lỗi xảy ra khi thêm lịch thực hành.");
     }
-    };
-
-
+  };
 
   return (
     <div className="container_schedule">
@@ -106,26 +121,27 @@ const AddSchedule = () => {
 
         <div className="form_container">
           <div className="form_wrapper">
-
             {/* Cột trái */}
             <div className="form_column">
               <div className="form_group">
                 <label>Năm học:</label>
-                <select name="semesterId" onChange={handleChange}>
+                <select name="year" onChange={handleChange} value={selectedYear}>
                   <option value="">-- Chọn năm học --</option>
-                  {semesters.map((s: any) => (
-                    <option key={s.id} value={s.id}>{s.name}</option>
+                  {Array.from(new Set(semesters.map(s => s.name))).map((yearName) => (
+                    <option key={yearName} value={yearName}>{yearName}</option>
                   ))}
                 </select>
               </div>
 
               <div className="form_group">
                 <label>Học kỳ:</label>
-                <select name="semesterName" onChange={handleChange}>
+                <select name="semesterId" onChange={handleChange} value={formData.semesterId}>
                   <option value="">-- Chọn học kỳ --</option>
-                  {semesters.map((s: any) => (
-                    <option key={s.id} value={s.semesterName}>{s.semesterName}</option>
-                  ))}
+                  {semesters
+                    .filter(s => s.name === selectedYear)
+                    .map(s => (
+                      <option key={s.id} value={s.id}>{s.semesterName}</option>
+                    ))}
                 </select>
               </div>
 

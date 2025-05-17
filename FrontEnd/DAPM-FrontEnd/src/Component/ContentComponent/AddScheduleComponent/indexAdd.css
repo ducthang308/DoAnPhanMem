@@ -38,7 +38,7 @@
     gap: 60px; 
     flex-wrap: wrap;
   }
-  
+
   .form_column {
     flex: 1;
     display: flex;
@@ -67,6 +67,7 @@
     border-radius: 6px;
     font-size: 14px;
     background-color: #e6f4ff;
+    width: 100%;
   }
   
   .form-submit {

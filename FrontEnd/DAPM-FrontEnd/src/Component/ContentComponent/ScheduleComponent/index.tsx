@@ -32,7 +32,6 @@ const Schedule = () => {
     }
   };
 
-
   const [filterOptions, setFilterOptions] = useState<SemesterFilter[]>([]);
   const [selectedYear, setSelectedYear] = useState<string>('');
   const [selectedSemester, setSelectedSemester] = useState<string>('');
@@ -55,36 +54,41 @@ const Schedule = () => {
     fetchSchedules();
   }, []);
 
-useEffect(() => {
-  const fetchFilterOptions = async () => {
-    try {
-      const token = localStorage.getItem("token");
-      const response = await axios.get("/api/v1/schedule/filter-options", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+  useEffect(() => {
+    const fetchSemesters = async () => {
+      try {
+        const token = localStorage.getItem("token");
+        const response = await axios.get("/api/v1/semesters", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
 
-      const mapped = response.data.map((sem: any) => ({
-        academicYear: `${sem.startYear}-${sem.endYear}`,
-        semesterName: sem.semesterName
-      }));
+        const mapped = response.data.map((sem: any) => ({
+          academicYear: sem.name,          
+          semesterName: sem.semesterName, 
+        }));
 
-      console.log("Mapped filter options:", mapped); 
-      setFilterOptions(mapped);
-    } catch (error) {
-      console.error("Error fetching filter options:", error);
-    }
-  };
-  fetchFilterOptions();
-}, []);
+        setFilterOptions(mapped);
+      } catch (error) {
+        console.error("Error fetching semesters:", error);
+      }
+    };
+
+    fetchSemesters();
+  }, []);
 
   useEffect(() => {
+  setSelectedSemester("");
+}, [selectedYear]);
+
+  useEffect(() => {
+    if (!selectedYear.includes('-') || !selectedSemester) return;
+
+    const [startYear, endYear] = selectedYear.split('-').map(Number);
+    if (isNaN(startYear) || isNaN(endYear)) return;
+
     const fetchFilteredSchedules = async () => {
-      if (!selectedYear || !selectedSemester) return;
-
-      const [startYear, endYear] = selectedYear.split('-').map(Number);
-
       try {
         const token = localStorage.getItem("token");
         const response = await axios.get("/api/v1/schedule/filter", {
@@ -95,9 +99,10 @@ useEffect(() => {
           params: {
             semesterName: selectedSemester,
             startYear,
-            endYear
-          }
+            endYear,
+          },
         });
+
         setSchedules(response.data);
       } catch (error) {
         console.error("Error fetching filtered schedules:", error);
@@ -132,13 +137,17 @@ return (
         </div>
         <div>
           <label>Học kỳ: </label>
-          <select value={selectedSemester} onChange={(e) => setSelectedSemester(e.target.value)}>
-            {[...new Set(filterOptions
-              .filter(opt => opt.academicYear === selectedYear)
-              .map(opt => opt.semesterName))].map((sem, index) => (
+          <select value={selectedSemester} onChange={e => setSelectedSemester(e.target.value)} disabled={!selectedYear}>
+            <option value="" disabled>Chọn học kỳ</option>
+            {[...new Set(
+              filterOptions
+                .filter(opt => opt.academicYear === selectedYear)
+                .map(opt => opt.semesterName)
+            )].map((sem, index) => (
               <option key={index} value={sem}>{sem}</option>
             ))}
           </select>
+
         </div>
       </div>
 

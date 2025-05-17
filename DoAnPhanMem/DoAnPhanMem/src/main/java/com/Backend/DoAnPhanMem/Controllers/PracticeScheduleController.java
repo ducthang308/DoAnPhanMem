@@ -42,13 +42,6 @@ public class PracticeScheduleController {
         return ResponseEntity.ok(schedules);
     }
 
-    // Endpoint lấy danh sách học kỳ (filter options)
-    @GetMapping("/filter-options")
-    @PreAuthorize("hasRole('ROLE_Training_Officer')")
-    public ResponseEntity<List<Semester>> getFilterOptions() {
-        List<Semester> semesters = semesterService.getAllSemesters();
-        return ResponseEntity.ok(semesters);
-    }
     @PostMapping("/add")
     @PreAuthorize("hasRole('ROLE_Training_Officer')")
     public ResponseEntity<PracticeSchedule> createSchedule(@RequestBody PracticeScheduleDTO dto) {
