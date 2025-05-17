@@ -11,10 +11,9 @@ const index = () => {
             <div className="container-content">
                 <Navbar></Navbar>
                 <Routes>
-                    <Route path="/" element={<Schedule />} />
-                    <Route path="/schedule" element={<Schedule />} />
-                    <Route path="/addschedule" element={<AddSchedule />} />
-                    <Route path="/editschedule" element={<EditSchedule />} />
+                    <Route path="" element={<Schedule />} />
+                    <Route path="addschedule" element={<AddSchedule />} />
+                    <Route path="editschedule/:id" element={<EditSchedule />} />
                 </Routes>
             </div>
         </div>
