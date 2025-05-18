@@ -8,15 +8,15 @@ spring:
     #    username: ducthang
     #    password: 'Thang@3008'
     #    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:sqlserver://localhost:1433;databaseName=ComputerManagement;encrypt=true;trustServerCertificate=true
+    url: jdbc:sqlserver://localhost:1433;databaseName=ComputerManagement2;encrypt=true;trustServerCertificate=true
     username: sa
-    password: 123456
+    password: 12345
     driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
   mail:
     host: smtp.gmail.com
     port: 587
-    username: ducthang30082004@gmail.com
-    password: xyjo iidy wmqj vfco
+    username: thaotruong23082004@gmail.com
+    password: nxxj lejr iova juux
     properties:
       mail:
         smtp:

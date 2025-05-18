@@ -26,7 +26,7 @@ public class PracticeSchedule {
     private String subject;
 
     @Column(name = "date")
-    private Date date;
+    private String date;
 
     @Column(name = "from_period")
     private Integer fromPeriod;
