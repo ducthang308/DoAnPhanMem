@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Login from '../Component/LoginComponent/index.tsx';
 import HomeLayout from '../Home.tsx';
 
+import UpdateAccount from '../Component/ContentComponent/AccountComponent/UpdateAccountComponent/account.jsx'
 
 const AppRouter = () => {
   return (
