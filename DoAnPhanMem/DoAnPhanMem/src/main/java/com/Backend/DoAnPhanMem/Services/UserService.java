@@ -19,6 +19,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -112,5 +113,10 @@ public class UserService  implements IUserService{
         return userRepository.findAll();
     }
 
+    public List<Users> getUsersByRoleName(String roleName) {
+        return userRepository.findAll().stream()
+                .filter(u -> u.getRoles() != null && roleName.equals(u.getRoles().getRoleName()))
+                .collect(Collectors.toList());
+    }
 
 }

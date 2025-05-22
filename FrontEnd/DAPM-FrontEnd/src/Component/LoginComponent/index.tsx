@@ -16,7 +16,7 @@ const LoginForm: React.FC = () => {
         try {
             const data = await login(email, password);
             localStorage.setItem('token', data.token);
-            navigate('/home');
+            navigate('/schedule');
         } catch (error) {
             alert('Sai tài khoản hoặc lỗi hệ thống');
         }
