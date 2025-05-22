@@ -13,6 +13,8 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @CrossOrigin(origins = "*")
 @RestController
@@ -69,5 +71,20 @@ public class UserController {
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
+    }
+
+    @GetMapping("/teachers")
+    @PreAuthorize("hasRole('ROLE_Training_Officer')")
+    public ResponseEntity<List<Map<String, Object>>> getTeachers() {
+        List<Users> teachers = userService.getUsersByRoleName("Teacher");
+
+        List<Map<String, Object>> result = teachers.stream()
+                .map(u -> Map.<String, Object>of(
+                        "id", u.getId(),
+                        "fullName", u.getFullName()
+                ))
+                .collect(Collectors.toList());
+
+        return ResponseEntity.ok(result);
     }
 }

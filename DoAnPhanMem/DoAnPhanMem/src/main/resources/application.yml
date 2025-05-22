@@ -1,16 +1,12 @@
 server:
-  port: 8088
+  port: 8080
   tomcat:
     max-http-post-size: 10000000
 spring:
   datasource:
-    #    url: jdbc:mysql://clothingstore.mysql.database.azure.com:3306/ClothingStore?useSSL=true&serverTimezone=UTC
-    #    username: ducthang
-    #    password: 'Thang@3008'
-    #    driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:sqlserver://localhost:1433;databaseName=ComputerManagement;encrypt=true;trustServerCertificate=true
     username: sa
-    password: 123456
+    password: 12345
     driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
   mail:
     host: smtp.gmail.com
