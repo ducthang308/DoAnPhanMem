@@ -14,17 +14,14 @@ const index = () => {
     return (
         <div className="content">
             <div className="container-content">
-<<<<<<< HEAD
                 <NavSchbar></NavSchbar>
                 <Routes>
                     <Route path="" element={<Schedule />} />
                     <Route path="addschedule" element={<AddSchedule />} />
                     <Route path="editschedule/:id" element={<EditSchedule />} />
                 </Routes>
-=======
                 <Navbar></Navbar>
                 <ComputerManagement></ComputerManagement>
->>>>>>> origin/main
             </div>
         </div>
     )
