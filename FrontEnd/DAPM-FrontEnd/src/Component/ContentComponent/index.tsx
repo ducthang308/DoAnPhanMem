@@ -20,8 +20,6 @@ const index = () => {
                     <Route path="addschedule" element={<AddSchedule />} />
                     <Route path="editschedule/:id" element={<EditSchedule />} />
                 </Routes>
-                <Navbar></Navbar>
-                <ComputerManagement></ComputerManagement>
             </div>
         </div>
     )
