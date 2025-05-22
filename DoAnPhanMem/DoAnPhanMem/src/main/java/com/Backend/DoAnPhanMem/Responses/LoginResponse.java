@@ -12,6 +12,8 @@ import lombok.*;
 @NoArgsConstructor
 @Builder
 public class LoginResponse {
+    private Long id;
+
     private String token;
 
     @JsonProperty("roles_id")
