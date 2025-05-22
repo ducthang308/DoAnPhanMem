@@ -77,6 +77,7 @@ public class UserService  implements IUserService{
         authenticationManager.authenticate(authenticationToken);
 
         // Generate token and create response DTO with roleId
+        Long id = existingUser.getId();
         String token = jwtToken.generationToken(existingUser);
         Long roleId = existingUser.getRoles().getId();
         email = existingUser.getEmail();
@@ -88,7 +89,7 @@ public class UserService  implements IUserService{
             throw new BadCredentialsException("Account is banned!");
         }
         else {
-            return new LoginResponse(token, roleId, email, name, address, status);
+            return new LoginResponse(id, token, roleId, email, name, address, status);
         }
     }
 

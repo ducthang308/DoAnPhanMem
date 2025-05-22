@@ -10,7 +10,7 @@ const index = () => {
         <div className="content">
             <div className="container-content">
                 <Navbar></Navbar>
-                <Management></Management>
+                <ComputerManagement></ComputerManagement>
             </div>
         </div>
     )
