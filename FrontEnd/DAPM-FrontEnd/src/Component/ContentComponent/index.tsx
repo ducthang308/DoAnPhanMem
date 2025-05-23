@@ -5,6 +5,9 @@ import NavSchbar from "./NavScheduleComponent/nav.tsx"
 import Schedule from "./ScheduleComponent/index.tsx";  
 import AddSchedule from "./AddScheduleComponent/index.tsx";
 import EditSchedule from "./EditScheduleComponent/index.tsx";
+import Profile from "./UserProfileComponent/index.tsx";
+import ChangePassword from "./ChangePassWordComponent/index.tsx";
+
 import Navbar from "./NavbarComponent/navbar.tsx"
 import UpdateAccount from "./AccountComponent/UpdateAccountComponent/account.tsx"
 import Management from './AccountComponent/ManagementComponent/management.tsx'
@@ -19,6 +22,8 @@ const index = () => {
                     <Route path="" element={<Schedule />} />
                     <Route path="addschedule" element={<AddSchedule />} />
                     <Route path="editschedule/:id" element={<EditSchedule />} />
+                    <Route path="profile" element={<Profile />} />
+                    <Route path="changepass" element={<ChangePassword />} />
                 </Routes>
             </div>
         </div>
