@@ -1,6 +1,7 @@
 package com.Backend.DoAnPhanMem.Services;
 
 import com.Backend.DoAnPhanMem.DTO.LabDTO;
+import com.Backend.DoAnPhanMem.DTO.LabRoomUpdateDTO;
 import com.Backend.DoAnPhanMem.Models.*;
 import com.Backend.DoAnPhanMem.Repository.*;
 import lombok.RequiredArgsConstructor;
@@ -21,13 +22,11 @@ public class LabService {
         return labRepository.findAll();
     }
 
-    public List<Lab> advancedSearch(String semesterName, Integer startYear, Integer endYear,
-                                    Integer dayOfWeek, Integer fromPeriod, Integer toPeriod) {
-        if (semesterName == null && startYear == null && endYear == null &&
-                dayOfWeek == null && fromPeriod == null && toPeriod == null) {
-            return getAllLabs(); // Gọi lại findAll()
+    public List<Lab> advancedSearch(Long semesterId, Integer dayOfWeek, Integer fromPeriod, Integer toPeriod) {
+        if (semesterId == null && dayOfWeek == null && fromPeriod == null && toPeriod == null) {
+            return getAllLabs();
         }
-        return labRepository.advancedSearch(semesterName, startYear, endYear, dayOfWeek, fromPeriod, toPeriod);
+        return labRepository.advancedSearch(semesterId, dayOfWeek, fromPeriod, toPeriod);
     }
 
     public LabDTO getLabById(Long id) {
@@ -52,7 +51,6 @@ public class LabService {
     public Lab updateLab(Long id, LabDTO dto) {
         Lab lab = labRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Lab not found"));
-
         lab.setClassCode(dto.getClassCode());
         lab.setSubject(dto.getSubject());
         lab.setDate(dto.getDate());
@@ -60,18 +58,31 @@ public class LabService {
         lab.setToPeriod(dto.getToPeriod());
         lab.setEffectiveDate(dto.getEffectiveDate());
         lab.setNotes(dto.getNotes());
-
         Semester semester = semesterRepository.findById(dto.getSemesterId())
                 .orElseThrow(() -> new RuntimeException("Semester not found"));
         Users user = userRepository.findById(dto.getUserId())
                 .orElseThrow(() -> new RuntimeException("User not found"));
         Room room = roomRepository.findById(dto.getRoomId())
                 .orElseThrow(() -> new RuntimeException("Room not found"));
-
         lab.setSemester(semester);
         lab.setUsers(user);
         lab.setRoom(room);
-
         return labRepository.save(lab);
+    }
+
+    public Lab updateRoomOnly(Long labId, Long roomId) {
+        Lab lab = labRepository.findById(labId)
+                .orElseThrow(() -> new RuntimeException("Lab not found: " + labId));
+        Room room = roomRepository.findById(roomId)
+                .orElseThrow(() -> new RuntimeException("Room not found: " + roomId));
+
+        lab.setRoom(room);
+        return labRepository.save(lab);
+    }
+
+    public void updateMultipleRooms(List<LabRoomUpdateDTO> updates) {
+        for (LabRoomUpdateDTO dto : updates) {
+            updateRoomOnly(dto.getLabId(), dto.getRoomId());
+        }
     }
 }

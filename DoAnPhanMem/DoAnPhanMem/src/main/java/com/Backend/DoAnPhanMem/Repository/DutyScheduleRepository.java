@@ -11,9 +11,12 @@ import java.util.Optional;
 
 @Repository
 public interface DutyScheduleRepository extends JpaRepository<DutySchedule, Long> {
-    @Query("SELECT d FROM DutySchedule d " +
-            "WHERE d.semester.startYear = :startYear AND d.semester.endYear = :endYear AND d.week = :week")
-    List<DutySchedule> findByYearAndWeek(@Param("startYear") int startYear, @Param("endYear") int endYear, @Param("week") int week);
-//    List<DutySchedule> findByYearAndWeek(int startYear, int endYear, int week);
-    Optional<DutySchedule> findBySemesterIdAndWeek(Long semesterId, Integer week);
+    @Query("SELECT d FROM DutySchedule d WHERE d.semester.semesterName = :semesterName AND d.week = :week")
+    List<DutySchedule> findBySemesterNameAndWeek(@Param("semesterName") String semesterName, @Param("week") int week);
+    Optional<DutySchedule> findBySemesterIdAndWeek(Long semesterId, Integer week); Optional<DutySchedule> findBySemesterIdAndWeekAndDayAndPartDay(
+            Long semesterId,
+            Integer week,
+            Integer day,
+            String partDay
+    );
 }

@@ -6,6 +6,7 @@ import java.util.Date;
 
 @Data
 public class LabDTO {
+    private Long id;
     private String classCode;
     private String subject;
     private String date;

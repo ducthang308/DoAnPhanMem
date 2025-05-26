@@ -56,7 +56,6 @@ public class Users implements UserDetails, OAuth2User, Serializable {
     public String getUsername() {
         return email;
     }
-
     @Override
     public String getPassword() {
         return password;

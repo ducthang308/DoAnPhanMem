@@ -2,9 +2,6 @@ import React from 'react'
 import "./index.css"
 import { Routes, Route } from 'react-router-dom';
 import Navbar from "./NavbarComponent/navbar.tsx"
-import UpdateAccount from "./AccountComponent/UpdateAccountComponent/account.tsx"
-import Management from './AccountComponent/ManagementComponent/management.tsx'
-import ComputerManagement from './ComputerComponent/ManagementComponent/management.tsx'
 import Schedule from "./ScheduleManagementComponent/schedule.tsx"
 import UpdateSchedule from "./UpdateScheduleManagementComponent/updateschedule.tsx"
 import Room from './RoomManagementComponent/room.tsx'
@@ -20,7 +17,7 @@ const index = () => {
                     <Route path="/update-schedule" element={<UpdateSchedule />} />
                     <Route path="/room" element={<Room />} />
                     <Route path="/update-room" element={<UpdateRoom />} />
-                    <Route path="/" element={<Schedule />} />
+                    <Route path="" element={<Schedule />} />
                 </Routes>
             </div>
         </div>

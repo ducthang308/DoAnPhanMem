@@ -24,4 +24,5 @@ public class Semester {
 
     @Column(name = "end_year", nullable = false)
     private Integer endYear;
+
 }

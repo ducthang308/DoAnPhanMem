@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -27,8 +28,8 @@ public class DutyScheduleService {
     private final SemesterRepository semesterRepository;
     private final JdbcTemplate jdbcTemplate;
 
-    public List<DutySchedule> getDutySchedulesByYearAndWeek(int startYear, int endYear, int week) {
-        return dutyScheduleRepository.findByYearAndWeek(startYear, endYear, week);
+    public List<DutySchedule> getDutySchedulesBySemesterNameAndWeek(String semesterName, int week) {
+        return dutyScheduleRepository.findBySemesterNameAndWeek(semesterName, week);
     }
 
     public List<IT_OfficerDTO> getITOfficers() {
@@ -39,35 +40,83 @@ public class DutyScheduleService {
         return jdbcTemplate.query(sql, (rs, rowNum) ->
                 new IT_OfficerDTO(rs.getLong("id"), rs.getString("full_name")));
     }
-
-public DutySchedule updateOrCreateDutySchedule(DutyScheduleRequestDTO request) {
-    Semester semester = semesterRepository.findByStartYearAndEndYear(request.getStartYear(), request.getEndYear());
-    if (semester == null) {
-        throw new RuntimeException("Không tìm thấy học kỳ với năm học " + request.getStartYear() + "-" + request.getEndYear());
+    public List<Semester> getAllSemesters() {
+        return semesterRepository.findAll();
     }
+    public List<DutyScheduleDTO> updateOrCreateDutySchedules(List<DutyScheduleRequestDTO> requests) {
+        List<DutyScheduleDTO> results = new ArrayList<>();
 
-    Optional<DutySchedule> existingSchedule = dutyScheduleRepository.findBySemesterIdAndWeek(semester.getId(), request.getWeek());
+        for (DutyScheduleRequestDTO request : requests) {
+            Semester semester = semesterRepository.findById(request.getSemesterId())
+                    .orElseThrow(() -> new RuntimeException("Không tìm thấy học kỳ với ID: " + request.getSemesterId()));
 
-    DutySchedule dutySchedule;
-    if (existingSchedule.isPresent()) {
-        dutySchedule = existingSchedule.get();
-        dutySchedule.setDay(request.getDay());
-        dutySchedule.setPartDay(request.getPartDay());
-        Users user = new Users();
-        user.setId(request.getUserId());
-        dutySchedule.setUsers(user);
-    } else {
-        dutySchedule = new DutySchedule();
-        dutySchedule.setWeek(request.getWeek());
-        dutySchedule.setDay(request.getDay());
-        dutySchedule.setPartDay(request.getPartDay());
-        dutySchedule.setSemester(semester);
-        Users user = new Users();
-        user.setId(request.getUserId());
-        dutySchedule.setUsers(user);
+            Optional<DutySchedule> existingSchedule = dutyScheduleRepository.findBySemesterIdAndWeekAndDayAndPartDay(
+                    semester.getId(), request.getWeek(), request.getDay(), request.getPartDay()
+            );
+
+            DutySchedule dutySchedule;
+            if (existingSchedule.isPresent()) {
+                dutySchedule = existingSchedule.get();
+                Users user = new Users();
+                user.setId(request.getUserId());
+                dutySchedule.setUsers(user);
+            } else {
+                dutySchedule = new DutySchedule();
+                dutySchedule.setSemester(semester);
+                dutySchedule.setWeek(request.getWeek());
+                dutySchedule.setDay(request.getDay());
+                dutySchedule.setPartDay(request.getPartDay());
+
+                Users user = new Users();
+                user.setId(request.getUserId());
+                dutySchedule.setUsers(user);
+            }
+
+            DutySchedule saved = dutyScheduleRepository.save(dutySchedule);
+
+            DutyScheduleDTO dto = new DutyScheduleDTO();
+            dto.setId(saved.getId());
+            dto.setDay(saved.getDay());
+            dto.setWeek(saved.getWeek());
+            dto.setPartDay(saved.getPartDay());
+            dto.setSemesterId(saved.getSemester().getId());
+            dto.setSemesterName(saved.getSemester().getSemesterName());
+            dto.setUserId(saved.getUsers().getId());
+            dto.setUsername(saved.getUsers().getFullName());
+
+            results.add(dto);
+        }
+
+        return results;
     }
-
-    // Lưu vào cơ sở dữ liệu
-    return dutyScheduleRepository.save(dutySchedule);
-}
+//    public DutySchedule updateOrCreateDutySchedule(DutyScheduleRequestDTO request) {
+//        Semester semester = semesterRepository.findByStartYearAndEndYear(request.getStartYear(), request.getEndYear());
+//        if (semester == null) {
+//            throw new RuntimeException("Không tìm thấy học kỳ với năm học " + request.getStartYear() + "-" + request.getEndYear());
+//        }
+//
+//        Optional<DutySchedule> existingSchedule = dutyScheduleRepository.findBySemesterIdAndWeek(semester.getId(), request.getWeek());
+//
+//        DutySchedule dutySchedule;
+//        if (existingSchedule.isPresent()) {
+//            dutySchedule = existingSchedule.get();
+//            dutySchedule.setDay(request.getDay());
+//            dutySchedule.setPartDay(request.getPartDay());
+//            Users user = new Users();
+//            user.setId(request.getUserId());
+//            dutySchedule.setUsers(user);
+//        } else {
+//            dutySchedule = new DutySchedule();
+//            dutySchedule.setWeek(request.getWeek());
+//            dutySchedule.setDay(request.getDay());
+//            dutySchedule.setPartDay(request.getPartDay());
+//            dutySchedule.setSemester(semester);
+//            Users user = new Users();
+//            user.setId(request.getUserId());
+//            dutySchedule.setUsers(user);
+//        }
+//
+//        // Lưu vào cơ sở dữ liệu
+//        return dutyScheduleRepository.save(dutySchedule);
+//    }
 }

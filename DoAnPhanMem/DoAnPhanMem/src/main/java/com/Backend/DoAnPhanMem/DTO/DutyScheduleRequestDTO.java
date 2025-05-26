@@ -10,8 +10,7 @@ import lombok.*;
 @Builder
 
 public class DutyScheduleRequestDTO {
-    private Integer startYear;
-    private Integer endYear;
+    private Long semesterId;
     private Integer week;
     private Integer day;
     private String partDay;

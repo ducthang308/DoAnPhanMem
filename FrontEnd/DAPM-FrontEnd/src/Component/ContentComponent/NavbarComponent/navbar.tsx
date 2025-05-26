@@ -15,8 +15,8 @@ const navbar = () => {
             </div>
             <div className="menu">
                 <nav>
-                    <Link to="/schedule">Quản lý lịch trực</Link>
-                    <Link to="/room">Quản lý sơ đồ phòng thực hành</Link>
+                    <Link to="/duty_schedule/schedule">Quản lý lịch trực</Link>
+                    <Link to="/duty_schedule/room">Quản lý sơ đồ phòng thực hành</Link>
                     <Link to="/">Đăng xuất</Link>
                 </nav>
             </div>

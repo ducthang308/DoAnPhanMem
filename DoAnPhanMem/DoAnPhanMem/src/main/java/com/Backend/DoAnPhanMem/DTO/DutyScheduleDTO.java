@@ -16,8 +16,7 @@ public class DutyScheduleDTO {
     private String partDay;
     private Long semesterId;
     private String semesterName;
-    private String year;
+//    private String year;
     private Long userId;
     private String username;
-
 }
