@@ -7,15 +7,16 @@ import com.Backend.DoAnPhanMem.Services.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("${api.prefix}/user")
 @RequiredArgsConstructor
@@ -52,5 +53,38 @@ public class UserController {
         } catch (Exception e) {
             return ResponseEntity.badRequest().body("Login failed: " + e.getMessage());
         }
+    }
+
+    @GetMapping("")
+    @PreAuthorize("hasRole('ROLE_Admin')")
+    public ResponseEntity<?> getAllUsers(){
+        List<Users> users = userService.getAllUsers();
+        return ResponseEntity.ok(users);
+    }
+
+    @PutMapping("/active/{id}")
+    @PreAuthorize("hasRole('ROLE_Admin')")
+    public ResponseEntity<?> updateActive(@PathVariable("id") Long id, @Valid @RequestBody LoginResponse loginResponse) {
+        try {
+            Users users = userService.updateActive(loginResponse, id);
+            return ResponseEntity.ok(users);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    @GetMapping("/teachers")
+    @PreAuthorize("hasRole('ROLE_Training_Officer')")
+    public ResponseEntity<List<Map<String, Object>>> getTeachers() {
+        List<Users> teachers = userService.getUsersByRoleName("Teacher");
+
+        List<Map<String, Object>> result = teachers.stream()
+                .map(u -> Map.<String, Object>of(
+                        "id", u.getId(),
+                        "fullName", u.getFullName()
+                ))
+                .collect(Collectors.toList());
+
+        return ResponseEntity.ok(result);
     }
 }

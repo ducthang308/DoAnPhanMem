@@ -1,0 +1,23 @@
+.content{
+    width: 100%;
+    margin: 20px 0;
+}
+
+.container-content {
+    display: flex;
+    max-width: 1200px;
+    margin: 0 auto;
+    gap: 20px;
+}
+  
+.content-navbar {
+    flex-shrink: 0;
+    height: fit-content;
+}
+  
+.content-main {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

@@ -17,7 +17,9 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -76,9 +78,10 @@ public class UserService  implements IUserService{
         authenticationManager.authenticate(authenticationToken);
 
         // Generate token and create response DTO with roleId
+        Long id = existingUser.getId();
         String token = jwtToken.generationToken(existingUser);
         Long roleId = existingUser.getRoles().getId();
-        Long userId = existingUser.getId();
+        email = existingUser.getEmail();
         String name = existingUser.getFullName();
         String address = existingUser.getAddress();
         Boolean status = existingUser.getStatus();
@@ -87,7 +90,33 @@ public class UserService  implements IUserService{
             throw new BadCredentialsException("Account is banned!");
         }
         else {
-            return new LoginResponse(token, roleId, userId, name, address, status);
+            return new LoginResponse(id, token, roleId, email, name, address, status);
         }
     }
+
+    @Override
+    public Users updateActive(LoginResponse loginResponse, Long id) throws Exception {
+        if (loginResponse.getStatus() == null) {
+            throw new IllegalArgumentException("Active status is required");
+        }
+
+        Users existingUser = userRepository.findById(id)
+                .orElseThrow(() -> new DataNotFoundException("Not found userId: " + id));
+
+        existingUser.setStatus(loginResponse.getStatus());
+
+        return userRepository.save(existingUser);
+    }
+
+    @Override
+    public List<Users> getAllUsers() {
+        return userRepository.findAll();
+    }
+
+    public List<Users> getUsersByRoleName(String roleName) {
+        return userRepository.findAll().stream()
+                .filter(u -> u.getRoles() != null && roleName.equals(u.getRoles().getRoleName()))
+                .collect(Collectors.toList());
+    }
+
 }

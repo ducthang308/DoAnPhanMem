@@ -20,12 +20,15 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+<<<<<<< HEAD
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/DoAnPhanMem/DoAnPhanMem/pom.xml" root0="SKIP_INSPECTION" />
   </component>
   <component name="ProblemsViewState">
     <option name="selectedTabId" value="CurrentFile" />
   </component>
+=======
+>>>>>>> 68db5adb29422492daf8b003534667669aa510ca
   <component name="ProjectColorInfo">{
   &quot;customColor&quot;: &quot;&quot;,
   &quot;associatedIndex&quot;: 0
@@ -35,6 +38,7 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
+<<<<<<< HEAD
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
     &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
@@ -54,6 +58,23 @@
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
+=======
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "Thao",
+    "last_opened_file_path": "D:/quangthao/Kì 6/DoAnPhanMem/DoAnPhanMem",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+>>>>>>> 68db5adb29422492daf8b003534667669aa510ca
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -70,17 +91,24 @@
       <option name="presentableId" value="Default" />
       <updated>1746802481864</updated>
       <workItem from="1746802482706" duration="74000" />
+<<<<<<< HEAD
       <workItem from="1746802888154" duration="4393000" />
       <workItem from="1746893150836" duration="1214000" />
       <workItem from="1746981471777" duration="6667000" />
       <workItem from="1747066297355" duration="8000" />
+=======
+      <workItem from="1746802888154" duration="1280000" />
+>>>>>>> 68db5adb29422492daf8b003534667669aa510ca
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+<<<<<<< HEAD
   <component name="UnknownFeatures">
     <option featureType="com.intellij.fileTypeFactory" implementationName="*.cmd" />
   </component>
+=======
+>>>>>>> 68db5adb29422492daf8b003534667669aa510ca
 </project>
