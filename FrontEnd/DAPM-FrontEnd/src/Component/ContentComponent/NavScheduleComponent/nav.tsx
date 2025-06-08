@@ -13,7 +13,7 @@ const NavSchedule = () => {
         </div>
       </div>
       <div className="menu">
-        <Link to="/schedule/profile">Thông tin cá nhân</Link>
+        <Link to="/profile">Thông tin cá nhân</Link>
         <Link to="/schedule">Quản lý lớp thực hành</Link>
         <Link to="/request-approval">Duyệt yêu cầu đổi lịch</Link>
         <Link to="/">Đăng xuất</Link>

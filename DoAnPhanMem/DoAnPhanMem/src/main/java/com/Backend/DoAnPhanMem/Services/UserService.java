@@ -1,5 +1,6 @@
 package com.Backend.DoAnPhanMem.Services;
 
+import com.Backend.DoAnPhanMem.DTO.UpdateProfileDTO;
 import com.Backend.DoAnPhanMem.DTO.UserDTO;
 import com.Backend.DoAnPhanMem.Exceptions.DataNotFoundException;
 import com.Backend.DoAnPhanMem.Exceptions.PermissonDenyException;
@@ -85,12 +86,13 @@ public class UserService  implements IUserService{
         String name = existingUser.getFullName();
         String address = existingUser.getAddress();
         Boolean status = existingUser.getStatus();
+        String phoneNumber = existingUser.getPhoneNumber();
 
         if (!status){
             throw new BadCredentialsException("Account is banned!");
         }
         else {
-            return new LoginResponse(id, token, roleId, email, name, address, status);
+            return new LoginResponse(id, token, roleId, email, name, address, status, phoneNumber);
         }
     }
 
@@ -111,6 +113,31 @@ public class UserService  implements IUserService{
     @Override
     public List<Users> getAllUsers() {
         return userRepository.findAll();
+    }
+
+    @Override
+    public Users getUserById(Long id) {
+        return userRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+    }
+
+    @Override
+    public Users updateProfile(Long id, UpdateProfileDTO profileDTO) {
+        Users existingUser = userRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Not found"));
+        if (profileDTO.getFullName() != null) {
+            existingUser.setFullName(profileDTO.getFullName());
+        }
+        if (profileDTO.getPhoneNumber() != null) {
+            existingUser.setPhoneNumber(profileDTO.getPhoneNumber());
+        }
+        if (profileDTO.getEmail() != null) {
+            existingUser.setEmail(profileDTO.getEmail());
+        }
+        if (profileDTO.getAddress() != null) {
+            existingUser.setAddress(profileDTO.getAddress());
+        }
+        return userRepository.save(existingUser);
     }
 
     public List<Users> getUsersByRoleName(String roleName) {

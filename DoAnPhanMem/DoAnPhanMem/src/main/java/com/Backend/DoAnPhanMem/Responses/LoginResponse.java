@@ -19,8 +19,6 @@ public class LoginResponse {
     @JsonProperty("roles_id")
     private Long rolesId;
 
-
-
     @JsonProperty("email")
     private String email;
 
@@ -33,6 +31,9 @@ public class LoginResponse {
     @JsonProperty("status")
     private Boolean status;
 
+    @JsonProperty("phone_number")
+    private String phoneNumber;
+
     public static LoginResponse fromUser(Users users){
         LoginResponse loginResponse = LoginResponse.builder()
                 .email(users.getEmail())
@@ -40,6 +41,7 @@ public class LoginResponse {
                 .address(users.getAddress())
                 .status(users.getStatus())
                 .rolesId(users.getRoles().getId())
+                .phoneNumber(users.getPhoneNumber())
                 .build();
         return loginResponse;
     }

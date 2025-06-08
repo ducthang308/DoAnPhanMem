@@ -13,7 +13,7 @@ const navbar = () => {
                 </div>
             </div>
             <div className="menu">
-                <a href="#">Thông tin cá nhân</a>
+                <a href="/profile">Thông tin cá nhân</a>
                 <a href="#">Quản lý người dùng</a>
                 <a href="#">Đăng xuất</a>
             </div>

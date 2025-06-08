@@ -1,5 +1,6 @@
 package com.Backend.DoAnPhanMem.Controllers;
 
+import com.Backend.DoAnPhanMem.DTO.UpdateProfileDTO;
 import com.Backend.DoAnPhanMem.DTO.UserDTO;
 import com.Backend.DoAnPhanMem.Models.Users;
 import com.Backend.DoAnPhanMem.Responses.LoginResponse;
@@ -86,5 +87,19 @@ public class UserController {
                 .collect(Collectors.toList());
 
         return ResponseEntity.ok(result);
+    }
+
+    @PatchMapping("/profile/{id}")
+    @PreAuthorize("isAuthenticated()")
+    public ResponseEntity<?> updateProfile(@PathVariable Long id, @Valid @RequestBody UpdateProfileDTO profileDTO) {
+        userService.updateProfile(id, profileDTO);
+        return ResponseEntity.ok("Update successfully");
+    }
+
+    @GetMapping("/{id}")
+    @PreAuthorize("isAuthenticated()")
+    public ResponseEntity<Users> getUserById(@PathVariable Long id) {
+        Users user = userService.getUserById(id);
+        return ResponseEntity.ok(user);
     }
 }

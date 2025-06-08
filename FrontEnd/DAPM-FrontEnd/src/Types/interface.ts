@@ -37,6 +37,13 @@ export interface IUser {
     roles_id: number;
 }
 
+export interface UpdateProfile {
+    fullName: string;
+    email: string;
+    address: string;
+    phoneNumber: string;
+}
+
 export interface IRoom {
     id?: number;
     roomName: string;
