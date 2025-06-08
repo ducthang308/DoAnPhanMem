@@ -23,13 +23,13 @@ public class LabController {
     private final RoomRepository roomRepository;
 
     @GetMapping("/labs")
-    @PreAuthorize("hasRole('ROLE_Admin_IT_Officer')")
+    @PreAuthorize("hasAnyRole('ROLE_Admin_IT_Officer', 'ROLE_IT_Officer', 'ROLE_Training_Officer')")
     public ResponseEntity<List<Lab>> getAllLabs() {
         return ResponseEntity.ok(labService.getAllLabs());
     }
 
     @GetMapping("/filter")
-    @PreAuthorize("hasRole('ROLE_Admin_IT_Officer')")
+    @PreAuthorize("hasAnyRole('ROLE_Admin_IT_Officer', 'ROLE_IT_Officer', 'ROLE_Training_Officer')")
     public ResponseEntity<List<Lab>> getSchedulesFiltered(
             @RequestParam(required = false) Long semesterId,
             @RequestParam(required = false) Integer dayOfWeek,

@@ -25,8 +25,7 @@ public class DutyScheduleController {
     private final DutyScheduleService dutyScheduleService;
 
     @GetMapping("/filter")
-//    @PreAuthorize("hasRole('IT_Officer') or hasRole('Admin_IT_Officer')")
-    @PreAuthorize("hasRole('Admin_IT_Officer')")
+    @PreAuthorize("hasAnyRole('ROLE_Admin_IT_Officer', 'ROLE_IT_Officer')")
     public ResponseEntity<List<DutyScheduleDTO>> getDutySchedulesBySemesterNameAndWeek(
             @RequestParam("semesterName") String semesterName,
             @RequestParam("week") int week) {
@@ -41,7 +40,6 @@ public class DutyScheduleController {
                         .partDay(s.getPartDay())
                         .semesterId(s.getSemester().getId())
                         .semesterName(s.getSemester().getSemesterName())
-//                        .year(s.getSemester().getStartYear() + " - " + s.getSemester().getEndYear())
                         .userId(s.getUsers().getId())
                         .username(s.getUsers().getFullName())
                         .build())
@@ -50,7 +48,7 @@ public class DutyScheduleController {
         return ResponseEntity.ok(result);
     }
     @GetMapping("/semesters")
-    @PreAuthorize("hasRole('ROLE_Admin_IT_Officer')")
+    @PreAuthorize("hasAnyRole('ROLE_Admin_IT_Officer', 'ROLE_IT_Officer')")
     public ResponseEntity<List<Semester>> getAllSemesters() {
         List<Semester> semesters = dutyScheduleService.getAllSemesters();
         return ResponseEntity.ok(semesters);
