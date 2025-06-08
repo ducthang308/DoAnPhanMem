@@ -5,9 +5,15 @@ import axiosClient from './axiosClient';
 
 export const login = async (email: string, password: string): Promise<LoginResponse> => {
   try {
-    const response = await axios.post<LoginResponse>('/api/v1/user/login', { email, password });
+    const response = await axios.post<LoginResponse>('/api/v1/user/login', {
+      email,
+      password
+    });
     return response.data;
-  } catch (error) {
+  } catch (error: any) {
+    if (axios.isAxiosError(error) && error.response) {
+      throw new Error(error.response.data.message || 'Đăng nhập thất bại');
+    }
     throw new Error('Đăng nhập thất bại');
   }
 };
