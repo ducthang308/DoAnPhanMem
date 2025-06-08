@@ -1,9 +1,11 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import Login from '../Component/LoginComponent/index.tsx';
 import HomeLayout from '../Home.tsx';
 import TrainingOfficerLayout from '../Component/ContentComponent/TrainingOfficerLayout.tsx';
+import Profile from "../Component/ContentComponent/UserProfileComponent/index.tsx";
 
 import Content from '../Component/ContentComponent';
 import UpdateAccount from '../Component/ContentComponent/AccountComponent/UpdateAccountComponent/account.jsx';
@@ -27,6 +29,7 @@ const AppRouter = () => {
         <Route path="addschedule" element={<AddSchedule />} />
         <Route path="editschedule/:id" element={<EditSchedule />} />
       </Route>
+      <Route path="/profile" element={<Profile />} />
     </Routes>
   );
 };
