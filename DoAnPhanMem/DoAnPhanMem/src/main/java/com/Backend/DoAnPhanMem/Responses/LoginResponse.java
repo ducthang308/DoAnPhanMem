@@ -19,6 +19,8 @@ public class LoginResponse {
     @JsonProperty("roles_id")
     private Long rolesId;
 
+
+
     @JsonProperty("email")
     private String email;
 
