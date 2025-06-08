@@ -1,7 +1,43 @@
 {
-  "files": [],
-  "references": [
-    { "path": "./tsconfig.app.json" },
-    { "path": "./tsconfig.node.json" }
-  ]
+  "compilerOptions": {
+    /* General Options */
+    "target": "ESNext", /* Hỗ trợ các tính năng mới nhất của JavaScript */
+    "module": "ESNext", /* Sử dụng ES module */
+    "strict": true, /* Bật kiểm tra kiểu chặt chẽ */
+    "esModuleInterop": true, /* Dễ dàng tương tác với CommonJS */
+    "forceConsistentCasingInFileNames": true, /* Kiểm tra phân biệt chữ hoa/thường trong tên file */
+    "skipLibCheck": true, /* Bỏ qua kiểm tra type trong file thư viện */
+    /* JSX and React */
+    "jsx": "react-jsx", /* Hỗ trợ JSX Runtime mới của React */
+    "jsxImportSource": "react", /* Chỉ định nguồn JSX (React) */
+    /* Module Resolution */
+    "moduleResolution": "node", /* Dùng Node.js để xử lý module */
+    "resolveJsonModule": true, /* Cho phép import file JSON */
+    /* Paths */
+    "baseUrl": "./", /* Gốc của project */
+    "paths": { /* Đường dẫn alias (nếu cần) */
+      "@components/*": [
+        "src/components/*"
+      ],
+      "@utils/*": [
+        "src/utils/*"
+      ]
+    },
+    /* Output Options */
+    "outDir": "./dist", /* Thư mục đầu ra */
+    "rootDir": "./src", /* Thư mục nguồn */
+    /* Type Checking */
+    "allowSyntheticDefaultImports": true, /* Hỗ trợ import mặc định từ CommonJS */
+    "noImplicitAny": false, /* Không yêu cầu rõ ràng loại `any` */
+    "strictNullChecks": true, /* Xử lý `null` và `undefined` cẩn thận */
+    /* Optional Advanced Options */
+    "useDefineForClassFields": true /* Sử dụng chuẩn ECMAScript cho class fields */
+  },
+  "include": [
+    "src"
+  ], /* Bao gồm tất cả file trong thư mục src */
+  "exclude": [
+    "node_modules",
+    "dist"
+  ] /* Loại trừ các thư mục không cần thiết */
 }
