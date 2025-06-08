@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
 import "./index.css"
 import Logo from "../../../assets/images/logo.png"
 
@@ -9,13 +10,15 @@ const navbar = () => {
                 <img src={Logo} alt="Avatar" />
                 <div className="profile-text">
                     <p>Xin chào,</p>
-                    <h3>Nguyễn Thị Huyền Thương</h3>
+                    <h3>Trương Như Quang Thảo</h3>
                 </div>
             </div>
             <div className="menu">
-                <a href="/profile">Thông tin cá nhân</a>
-                <a href="#">Quản lý người dùng</a>
-                <a href="#">Đăng xuất</a>
+                <nav>
+                    <Link to="/duty_schedule/schedule">Quản lý lịch trực</Link>
+                    <Link to="/duty_schedule/room">Quản lý sơ đồ phòng thực hành</Link>
+                    <Link to="/">Đăng xuất</Link>
+                </nav>
             </div>
         </div>
     )
