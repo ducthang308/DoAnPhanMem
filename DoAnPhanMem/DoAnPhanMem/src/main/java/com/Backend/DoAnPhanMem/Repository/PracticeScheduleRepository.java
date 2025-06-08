@@ -9,4 +9,15 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface PracticeScheduleRepository extends JpaRepository<PracticeSchedule, Long> {}
+public interface PracticeScheduleRepository extends JpaRepository<PracticeSchedule, Long> {
+    @Query("SELECT ps FROM PracticeSchedule ps " +
+            "JOIN ps.semester s " +
+            "WHERE s.semesterName = :semesterName " +
+            "AND s.startYear = :startYear " +
+            "AND s.endYear = :endYear")
+    List<PracticeSchedule> findBySemesterAndYear(
+            @Param("semesterName") String semesterName,
+            @Param("startYear") Integer startYear,
+            @Param("endYear") Integer endYear
+    );
+}

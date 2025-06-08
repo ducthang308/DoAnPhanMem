@@ -1,0 +1,58 @@
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.3); /* mờ nền */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999; /* đè lên tất cả */
+}
+
+.form-frame {
+  background-color: white;
+  padding: 30px;
+  border-radius: 10px;
+  min-width: 400px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+
+.form-frame input,
+.form-frame select,
+.form-frame textarea {
+  width: 100%;
+  margin-bottom: 12px;
+  padding: 8px;
+  background-color: #bde3fa;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.form-frame h3 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.form-frame .actions {
+  display: flex;
+  justify-content: space-between;
+}
+
+.actions button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+}
+
+.cancel {
+  background-color: red;
+  color: white;
+}
+
+.confirm {
+  background-color: limegreen;
+  color: white;
+}

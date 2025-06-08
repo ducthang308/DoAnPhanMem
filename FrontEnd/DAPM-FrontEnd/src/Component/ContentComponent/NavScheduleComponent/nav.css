@@ -1,0 +1,55 @@
+
+.content-navbar{
+  width: 250px;
+  background-color: #cfe2ff;
+  padding: 20px 10px;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.profile{
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+}
+
+.profile img {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.profile p {
+  margin: 5px 0 0;
+  color: #555;
+  font-size: 14px;
+}
+
+.profile h3 {
+  margin: 5px 0 15px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #000;
+}
+
+.menu a {
+  display: flex;
+  flex-direction: column;
+  margin: 10px auto;
+  padding: 10px;
+  font-size: 14px;
+  border-radius: 8px;
+  text-decoration: none;
+  color: white;
+  background: linear-gradient(90deg, #4285F4, #6a5af9);
+  font-weight: 500;
+  transition: background 0.3s ease;
+}
+
+.menu a:hover {
+  background: linear-gradient(90deg, #6a5af9, #4285F4);
+}

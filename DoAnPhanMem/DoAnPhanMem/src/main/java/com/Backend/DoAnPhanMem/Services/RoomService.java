@@ -1,24 +1,46 @@
 package com.Backend.DoAnPhanMem.Services;
 
+import com.Backend.DoAnPhanMem.DTO.RoomDTO;
+import com.Backend.DoAnPhanMem.Exceptions.DataNotFoundException;
 import com.Backend.DoAnPhanMem.Models.Room;
-import com.Backend.DoAnPhanMem.Models.Semester;
 import com.Backend.DoAnPhanMem.Repository.RoomRepository;
-import com.Backend.DoAnPhanMem.Repository.SemesterRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service
 @RequiredArgsConstructor
-public class RoomService {
+@Service
+public class RoomService implements IRoomService {
 
-    @Autowired
     private final RoomRepository roomRepository;
 
-    public List<Room> getAllRooms() {
-        return roomRepository.findAll();
+    @Override
+    public Room createRoom(RoomDTO roomDTO){
+        Room room = Room.builder()
+                .roomName(roomDTO.getRoomName())
+                .floors(roomDTO.getFloors())
+                .build();
+        return roomRepository.save(room);
     }
 
+    @Override
+    public List<Room> getAllRoom(String keyword) {
+        return roomRepository.searchRoom(keyword);
+    }
+
+    @Override
+    public Room updateRoom(long id, RoomDTO roomDTO){
+        Room existingRoom = roomRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Not found"));
+        existingRoom.setRoomName(roomDTO.getRoomName());
+        existingRoom.setFloors(roomDTO.getFloors());
+        roomRepository.save(existingRoom);
+        return existingRoom;
+    }
+
+    @Override
+    public void deleteRoom(long id) {
+        roomRepository.deleteById(id);
+    }
 }

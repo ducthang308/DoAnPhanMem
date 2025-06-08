@@ -1,13 +1,19 @@
 package com.Backend.DoAnPhanMem.DTO;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import jakarta.persistence.Column;
+import lombok.*;
 
 @Data
-@NoArgsConstructor
+@Getter
+@Setter
 @AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class RoomDTO {
-    private Long id;
+    @JsonProperty("roomName")
     private String roomName;
+
+    @JsonProperty("floors")
+    private Integer floors;
 }

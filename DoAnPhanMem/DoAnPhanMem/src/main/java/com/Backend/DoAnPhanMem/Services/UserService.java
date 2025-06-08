@@ -1,5 +1,6 @@
 package com.Backend.DoAnPhanMem.Services;
 
+import com.Backend.DoAnPhanMem.DTO.UpdateProfileDTO;
 import com.Backend.DoAnPhanMem.DTO.UserDTO;
 import com.Backend.DoAnPhanMem.Exceptions.DataNotFoundException;
 import com.Backend.DoAnPhanMem.Exceptions.PermissonDenyException;
@@ -19,6 +20,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -77,18 +79,20 @@ public class UserService  implements IUserService{
         authenticationManager.authenticate(authenticationToken);
 
         // Generate token and create response DTO with roleId
+        Long id = existingUser.getId();
         String token = jwtToken.generationToken(existingUser);
         Long roleId = existingUser.getRoles().getId();
         email = existingUser.getEmail();
         String name = existingUser.getFullName();
         String address = existingUser.getAddress();
         Boolean status = existingUser.getStatus();
+        String phoneNumber = existingUser.getPhoneNumber();
 
         if (!status){
             throw new BadCredentialsException("Account is banned!");
         }
         else {
-            return new LoginResponse(token, roleId, email, name, address, status);
+            return new LoginResponse(id, token, roleId, email, name, address, status, phoneNumber);
         }
     }
 
@@ -111,5 +115,35 @@ public class UserService  implements IUserService{
         return userRepository.findAll();
     }
 
+    @Override
+    public Users getUserById(Long id) {
+        return userRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+    }
+
+    @Override
+    public Users updateProfile(Long id, UpdateProfileDTO profileDTO) {
+        Users existingUser = userRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Not found"));
+        if (profileDTO.getFullName() != null) {
+            existingUser.setFullName(profileDTO.getFullName());
+        }
+        if (profileDTO.getPhoneNumber() != null) {
+            existingUser.setPhoneNumber(profileDTO.getPhoneNumber());
+        }
+        if (profileDTO.getEmail() != null) {
+            existingUser.setEmail(profileDTO.getEmail());
+        }
+        if (profileDTO.getAddress() != null) {
+            existingUser.setAddress(profileDTO.getAddress());
+        }
+        return userRepository.save(existingUser);
+    }
+
+    public List<Users> getUsersByRoleName(String roleName) {
+        return userRepository.findAll().stream()
+                .filter(u -> u.getRoles() != null && roleName.equals(u.getRoles().getRoleName()))
+                .collect(Collectors.toList());
+    }
 
 }

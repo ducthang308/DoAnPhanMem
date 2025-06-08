@@ -12,6 +12,8 @@ import lombok.*;
 @NoArgsConstructor
 @Builder
 public class LoginResponse {
+    private Long id;
+
     private String token;
 
     @JsonProperty("roles_id")
@@ -29,6 +31,9 @@ public class LoginResponse {
     @JsonProperty("status")
     private Boolean status;
 
+    @JsonProperty("phone_number")
+    private String phoneNumber;
+
     public static LoginResponse fromUser(Users users){
         LoginResponse loginResponse = LoginResponse.builder()
                 .email(users.getEmail())
@@ -36,6 +41,7 @@ public class LoginResponse {
                 .address(users.getAddress())
                 .status(users.getStatus())
                 .rolesId(users.getRoles().getId())
+                .phoneNumber(users.getPhoneNumber())
                 .build();
         return loginResponse;
     }

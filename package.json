@@ -1,8 +1,6 @@
 {
   "devDependencies": {
-    "vite": "^6.3.5"
-  },
-  "dependencies": {
+    "vite": "^6.3.5",
     "axios": "^1.9.0"
   }
 }
