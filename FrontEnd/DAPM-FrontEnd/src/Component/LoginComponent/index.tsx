@@ -15,8 +15,16 @@ const LoginForm: React.FC = () => {
         e.preventDefault();
         try {
             const data = await login(email, password);
+            console.log(data);
             localStorage.setItem('token', data.token);
-            navigate('/schedule');
+            localStorage.setItem("user", JSON.stringify(data));
+            if (data.roles_id === 1) {
+                navigate('/home');
+            } else if (data.roles_id === 2) {
+                navigate('/training');
+            } else {
+                alert("Vai trò không hợp lệ");
+            }
         } catch (error) {
             alert('Sai tài khoản hoặc lỗi hệ thống');
         }
