@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import "./index.css";
 import { Routes, Route } from 'react-router-dom';
-import NavSchbar from "./NavScheduleComponent/nav.tsx";
-import Schedule from "./ScheduleComponent/index.tsx";
-import AddSchedule from "./AddScheduleComponent/index.tsx";
-import EditSchedule from "./EditScheduleComponent/index.tsx";
-import Navbar from "./NavbarComponent/navbar.tsx";
-import UpdateAccount from "./AccountComponent/UpdateAccountComponent/account.tsx";
-import Management from './AccountComponent/ManagementComponent/management.tsx';
-import ComputerManagement from './ComputerComponent/ManagementComponent/management.tsx';
+import NavSchbar from './NavScheduleComponent/nav';
+import Schedule from './ScheduleComponent';
+import AddSchedule from './AddScheduleComponent';
+import EditSchedule from './EditScheduleComponent';
+import Navbar from './NavbarComponent/navbar';
+import UpdateAccount from './AccountComponent/UpdateAccountComponent/account';
+import Management from './AccountComponent/ManagementComponent/management';
+import ComputerManagement from './ComputerComponent/ManagementComponent/management';
 import type { IUser } from '../../Types/interface.ts';
 
 const Index = () => {
