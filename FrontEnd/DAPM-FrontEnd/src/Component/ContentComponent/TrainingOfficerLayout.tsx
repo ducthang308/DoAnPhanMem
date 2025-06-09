@@ -1,6 +1,6 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
-import NavSchbar from './NavScheduleComponent/nav.tsx';
+import NavSchbar from '../ContentComponent/NavScheduleComponent/nav';
 import Header from '../../Component/HeaderComponent';
 import Footer from '../../Component/FooterComponent';
 
