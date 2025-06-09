@@ -41,14 +41,14 @@ public class LabController {
         ));
     }
 
-    @GetMapping("/rooms")
-    @PreAuthorize("hasRole('ROLE_Admin_IT_Officer')")
-    public ResponseEntity<List<RoomDTO>> getAllRooms() {
-        List<RoomDTO> roomDTOs = roomRepository.findAll().stream()
-                .map(room -> new RoomDTO(room.getId(), room.getRoomName()))
-                .toList();
-        return ResponseEntity.ok(roomDTOs);
-    }
+//    @GetMapping("/rooms")
+//    @PreAuthorize("hasRole('ROLE_Admin_IT_Officer')")
+//    public ResponseEntity<List<RoomDTO>> getAllRooms() {
+//        List<RoomDTO> roomDTOs = roomRepository.findAll().stream()
+//                .map(room -> new RoomDTO(room.getId(), room.getRoomName()))
+//                .toList();
+//        return ResponseEntity.ok(roomDTOs);
+//    }
 
 
     @PutMapping("/update-rooms-bulk")

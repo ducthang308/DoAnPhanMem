@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import type { FormEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { login } from '../../Services/LoginServices';
-import Header from '../HeaderComponent/index.tsx'
-import Footer from '../FooterComponent/index.tsx'
+import Header from '../HeaderComponent'
+import Footer from '../FooterComponent'
 import "./index.css"
 
 const LoginForm: React.FC = () => {
