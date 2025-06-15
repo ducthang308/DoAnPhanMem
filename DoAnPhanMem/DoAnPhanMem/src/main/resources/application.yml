@@ -1,12 +1,12 @@
 server:
-  port: ${PORT:8080}
+  port: ${PORT:8081}
   tomcat:
     max-http-form-post-size: 10000000
 spring:
   datasource:
-    url: jdbc:sqlserver://localhost:1433;databaseName=ComputerManagement;encrypt=true;trustServerCertificate=true
-    username: sa
-    password: 123456
+    url: jdbc:sqlserver://34.59.38.62:1433;databaseName=ComputerManagement;encrypt=true;trustServerCertificate=true
+    username: sqlserver
+    password: 123123zxc
     driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
   mail:
     host: smtp.gmail.com
