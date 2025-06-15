@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import './index.css';
 import NavSchedule from "../NavScheduleComponent/nav.js";
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-// import { faPenToSquare, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPenToSquare, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from 'react-router-dom';
 import type { PracticeSchedule } from '../../../Types/PracticeSchedule.ts';
 import type { SemesterFilter } from '../../../Types/SemesterFilter.ts';
@@ -152,7 +152,7 @@ const Schedule = () => {
         </div>
 
         {/* Add Schedule Button */}
-        <button className="add-button" onClick={handleAddClick}>+ Thêm lịch</button>
+        <button className="create-button" onClick={handleAddClick}>+ Thêm lịch</button>
 
         {/* Table */}
         <table className="schedule-table">

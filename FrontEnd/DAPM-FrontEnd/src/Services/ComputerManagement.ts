@@ -48,3 +48,13 @@ export const deleteRoom = async (id: number) => {
         throw new Error('Xóa dữ liệu phòng máy thất bại');
     }
 };
+
+export const getAllRoom = async () => {
+    try {
+        const response = await axiosClient.get<IRoom[]>(`/api/v1/room`);
+        return response.data;
+    } catch (error) {
+        console.error(error)
+        throw new Error("Lấy danh sách phòng thất bại")
+    }
+}

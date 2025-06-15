@@ -22,11 +22,12 @@ import java.util.stream.Collectors;
 @RequestMapping("${api.prefix}/user")
 @RequiredArgsConstructor
 public class UserController {
+
     private final UserService userService;
 
     @PostMapping("/register")
     public ResponseEntity<?> register(@Valid @RequestBody UserDTO userDTO,
-                                      BindingResult result){
+            BindingResult result) {
         try {
             if (result.hasErrors()) {
                 List<String> errorMessage = result.getFieldErrors()
@@ -35,13 +36,13 @@ public class UserController {
                         .toList();
                 return ResponseEntity.badRequest().body(errorMessage);
             }
-            if(!userDTO.getPassword().equals(userDTO.getRetypePass())){
+            if (!userDTO.getPassword().equals(userDTO.getRetypePass())) {
                 return ResponseEntity.badRequest().body("Password and retypepass not same");
             }
             Users user = userService.createUser(userDTO);
 
             return ResponseEntity.ok(user);
-        }catch (Exception e){
+        } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
@@ -58,7 +59,7 @@ public class UserController {
 
     @GetMapping("")
     @PreAuthorize("hasRole('ROLE_Admin')")
-    public ResponseEntity<?> getAllUsers(){
+    public ResponseEntity<?> getAllUsers() {
         List<Users> users = userService.getAllUsers();
         return ResponseEntity.ok(users);
     }
@@ -102,4 +103,11 @@ public class UserController {
         Users user = userService.getUserById(id);
         return ResponseEntity.ok(user);
     }
+
+    @GetMapping("/infor")
+    @PreAuthorize("isAuthenticated()")
+    public ResponseEntity<?> getUserByToken(@RequestHeader("Authorization") String token) {
+        return ResponseEntity.ok(this.userService.findUserByToken(token));
+    }
+
 }

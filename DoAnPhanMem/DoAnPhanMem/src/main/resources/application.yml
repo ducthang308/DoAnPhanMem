@@ -1,7 +1,7 @@
 server:
   port: 8080
   tomcat:
-    max-http-post-size: 10000000
+    max-http-form-post-size: 10000000
 spring:
   datasource:
     url: jdbc:sqlserver://localhost:1433;databaseName=ComputerManagement;encrypt=true;trustServerCertificate=true
@@ -32,6 +32,9 @@ spring:
       enabled: true
       max-file-size: 20MB
       max-request-size: 50MB
+  
+  jmx:
+    enabled: false
 
 logging:
   level:
@@ -44,3 +47,4 @@ api:
 jwt:
   expiration: 3600 #60 minutes = 60 * 60
   secretKey: xGOnTfLD3SjBwuK6pUYJMynjaJ/rksW/ItheskdThnc=
+

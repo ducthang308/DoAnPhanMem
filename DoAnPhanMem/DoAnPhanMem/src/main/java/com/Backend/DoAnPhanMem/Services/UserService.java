@@ -10,6 +10,7 @@ import com.Backend.DoAnPhanMem.Models.Users;
 import com.Backend.DoAnPhanMem.Repository.RoleRepository;
 import com.Backend.DoAnPhanMem.Repository.UserRepository;
 import com.Backend.DoAnPhanMem.Responses.LoginResponse;
+import io.jsonwebtoken.Claims;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -146,4 +147,15 @@ public class UserService  implements IUserService{
                 .collect(Collectors.toList());
     }
 
+    @Override
+    public Users findUserByToken(String token) {
+        String jwt = token.substring(7);
+        String email = jwtToken.extractEmail(jwt);
+        return findUserByEmail(email);
+    }
+
+    @Override
+    public Users findUserByEmail(String email) {
+        return this.userRepository.findByEmail(email).orElse(null);
+    }
 }

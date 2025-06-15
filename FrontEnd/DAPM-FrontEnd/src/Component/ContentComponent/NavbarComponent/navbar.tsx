@@ -15,8 +15,10 @@ const navbar = () => {
             </div>
             <div className="menu">
                 <nav>
-                    <Link to="/duty_schedule/schedule">Quản lý lịch trực</Link>
-                    <Link to="/duty_schedule/room">Quản lý sơ đồ phòng thực hành</Link>
+                    <Link to="/profile">Thông tin cá nhân</Link>
+                    <Link to="/it-officer/duty_schedule/schedule">Quản lý lịch trực</Link>
+                    {/* <Link to="/duty_schedule/room">Quản lý sơ đồ phòng thực hành</Link> */}
+                    <Link to="/it-officer/computers/">Quản lý máy tính</Link>
                     <Link to="/">Đăng xuất</Link>
                 </nav>
             </div>

@@ -9,11 +9,11 @@ export interface PracticeSchedule {
   notes: string;
   semester: {
     id: number;
-    semesterName: string; 
+    semesterName: string;
   };
   users: {
     id: number;
-    fullName: string; 
+    fullName: string;
   };
   room: {
     id: number;

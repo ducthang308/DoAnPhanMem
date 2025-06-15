@@ -8,7 +8,7 @@ import java.util.Date;
 public class PracticeScheduleDTO {
     private String classCode;
     private String subject;
-    private String date;
+    private Integer date;
     private Integer fromPeriod;
     private Integer toPeriod;
     private Date effectiveDate;

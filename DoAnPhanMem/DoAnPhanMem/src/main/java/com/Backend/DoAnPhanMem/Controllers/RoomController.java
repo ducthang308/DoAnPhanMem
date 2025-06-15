@@ -21,7 +21,7 @@ public class RoomController {
     private final RoomService roomService;
 
     @PostMapping("")
-    @PreAuthorize("hasRole('ROLE_Admin')")
+    @PreAuthorize("hasAnyRole('ROLE_Admin', 'ROLE_Admin_IT_Officer', 'ROLE_IT_Officer')")
     public ResponseEntity<?> createRoom(@Valid @RequestBody RoomDTO roomDTO, BindingResult result){
         if(result.hasErrors()){
             List<String> errorMessage = result.getFieldErrors()
@@ -35,14 +35,14 @@ public class RoomController {
     }
 
     @GetMapping("")
-    @PreAuthorize("hasRole('ROLE_Admin')")
+    @PreAuthorize("hasAnyRole('ROLE_Admin', 'ROLE_Admin_IT_Officer', 'ROLE_IT_Officer')")
     public ResponseEntity<List<Room>> getAllRoom(@RequestParam(defaultValue = "") String keyword){
         List<Room> rooms = roomService.getAllRoom(keyword);
         return ResponseEntity.ok(rooms);
     }
 
     @PutMapping("/{id}")
-    @PreAuthorize("hasRole('ROLE_Admin')")
+    @PreAuthorize("hasAnyRole('ROLE_Admin', 'ROLE_Admin_IT_Officer', 'ROLE_IT_Officer')")
     public ResponseEntity<?> updateRoom(@PathVariable Long id,
                                               @Valid @RequestBody RoomDTO roomDTO)
     {
@@ -51,7 +51,7 @@ public class RoomController {
     }
 
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasRole('ROLE_Admin')")
+    @PreAuthorize("hasAnyRole('ROLE_Admin', 'ROLE_Admin_IT_Officer', 'ROLE_IT_Officer')")
     public ResponseEntity<String> deleteRoom(@PathVariable Long id){
         roomService.deleteRoom(id);
         return ResponseEntity.ok("Delete successfully");
