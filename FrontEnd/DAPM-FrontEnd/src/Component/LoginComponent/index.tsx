@@ -20,8 +20,12 @@ const LoginForm: React.FC = () => {
             localStorage.setItem("user", JSON.stringify(data));
             if (data.roles_id === 1) {
                 navigate('/home');
-            } else if (data.roles_id === 2) {
+            } else if (data.roles_id === 5) {
+                navigate('/schedule/change');
+            } else if (data.roles_id === 4) {
                 navigate('/training');
+            } else if (data.roles_id === 3 || data.roles_id === 2) {
+                navigate('/it-officer')
             } else {
                 alert("Vai trò không hợp lệ");
             }

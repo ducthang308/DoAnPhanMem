@@ -20,4 +20,8 @@ public interface PracticeScheduleRepository extends JpaRepository<PracticeSchedu
             @Param("startYear") Integer startYear,
             @Param("endYear") Integer endYear
     );
+
+    Object findByUsers_id(Long usersId);
+
+    List<PracticeSchedule> findAllByUsers_id(Long usersId);
 }

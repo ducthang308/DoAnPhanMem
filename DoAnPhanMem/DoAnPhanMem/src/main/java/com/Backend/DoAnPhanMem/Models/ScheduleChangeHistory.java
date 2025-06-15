@@ -16,6 +16,9 @@ public class ScheduleChangeHistory {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "new_date")
+    private Integer newDate;
+
     @Column(name = "new_from_period", nullable = false)
     private Integer newFromPeriod;
 

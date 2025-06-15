@@ -108,4 +108,7 @@ public class PracticeScheduleService {
         scheduleRepository.delete(schedule);
     }
 
+    public List<PracticeSchedule> findByUserID(Long userID) {
+        return this.scheduleRepository.findAllByUsers_id(userID);
+    }
 }

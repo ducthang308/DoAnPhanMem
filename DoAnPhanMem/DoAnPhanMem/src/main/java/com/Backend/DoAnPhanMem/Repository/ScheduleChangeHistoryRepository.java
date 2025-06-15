@@ -4,6 +4,10 @@ import com.Backend.DoAnPhanMem.Models.*;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
-public interface ScheduleChangeHistoryRepository extends JpaRepository<ScheduleChangeHistory, Long> {}
+public interface ScheduleChangeHistoryRepository extends JpaRepository<ScheduleChangeHistory, Long> {
+    List<ScheduleChangeHistory> findScheduleChangeHistoriesByStatus(String status);
+}
 

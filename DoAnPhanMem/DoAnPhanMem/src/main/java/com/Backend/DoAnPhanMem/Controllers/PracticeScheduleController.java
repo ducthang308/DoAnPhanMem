@@ -3,10 +3,12 @@ package com.Backend.DoAnPhanMem.Controllers;
 import com.Backend.DoAnPhanMem.DTO.PracticeScheduleDTO;
 import com.Backend.DoAnPhanMem.Models.PracticeSchedule;
 import com.Backend.DoAnPhanMem.Models.Semester;
+import com.Backend.DoAnPhanMem.Models.Users;
 import com.Backend.DoAnPhanMem.Repository.PracticeScheduleRepository;
 import com.Backend.DoAnPhanMem.Repository.RoomRepository;
 import com.Backend.DoAnPhanMem.Repository.SemesterRepository;
 import com.Backend.DoAnPhanMem.Repository.UserRepository;
+import com.Backend.DoAnPhanMem.Services.IUserService;
 import com.Backend.DoAnPhanMem.Services.PracticeScheduleService;
 import com.Backend.DoAnPhanMem.Services.SemesterService;
 import lombok.RequiredArgsConstructor;
@@ -23,6 +25,7 @@ public class PracticeScheduleController {
     private final PracticeScheduleService scheduleService;
     private final SemesterService semesterService;
     private final PracticeScheduleRepository scheduleRepo;
+    private final IUserService userService;
 
     @GetMapping("")
     @PreAuthorize("hasRole('ROLE_Training_Officer')")
@@ -50,7 +53,7 @@ public class PracticeScheduleController {
     }
 
     @GetMapping("/{id}")
-    @PreAuthorize("hasRole('ROLE_Training_Officer')")
+    @PreAuthorize("hasAnyRole('ROLE_Training_Officer', 'ROLE_Lecturer')")
     public ResponseEntity<PracticeScheduleDTO> getScheduleById(@PathVariable Long id) {
         PracticeScheduleDTO dto = scheduleService.getScheduleById(id);
         return ResponseEntity.ok(dto);
@@ -73,4 +76,11 @@ public class PracticeScheduleController {
         return ResponseEntity.noContent().build();
     }
 
+    @GetMapping("/getByUser")
+    @PreAuthorize("hasRole('ROLE_Lecturer')")
+    public ResponseEntity<?> getScheduleByUser(@RequestHeader("Authorization") String token) {
+        Users user = userService.findUserByToken(token);
+        List<PracticeSchedule> practiceSchedules = this.scheduleService.findByUserID(user.getId());
+        return ResponseEntity.ok(practiceSchedules);
+    }
 }

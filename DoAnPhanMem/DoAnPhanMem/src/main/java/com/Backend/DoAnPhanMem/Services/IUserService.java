@@ -17,4 +17,7 @@ public interface IUserService {
     Users getUserById(Long id);
     Users updateProfile(Long id, UpdateProfileDTO profileDTO);
 
+    public Users findUserByToken(String token);
+
+    Users findUserByEmail(String email);
 }

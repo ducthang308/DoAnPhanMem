@@ -15,6 +15,7 @@ import java.util.List;
 @RequestMapping("${api.prefix}/role")
 @RequiredArgsConstructor
 public class RoleController {
+    
     private final RoleService roleService;
 
     @GetMapping("")

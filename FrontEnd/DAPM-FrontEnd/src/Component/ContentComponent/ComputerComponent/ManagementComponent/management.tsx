@@ -2,15 +2,15 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import type { IRoom } from '../../../../Types/interface.ts';
 import "./index.css"
-import Search from '../../../SearchComponent/search.tsx'
-import AddButton from "../../../ButtonComponent/add.tsx"
-import DeleteButton from "../../../ButtonComponent/deleteButton.tsx"
-import UpdateButton from "../../../ButtonComponent/update.tsx"
-import { getRoom } from '../../../../Services/ComputerManagement.ts'
-import { createRoom } from '../../../../Services/ComputerManagement.ts'
-import { updateRoom } from '../../../../Services/ComputerManagement.ts'
-import { deleteRoom } from '../../../../Services/ComputerManagement.ts'
-import AddRoomForm from '../AddComponent/addcomputer.tsx';
+import Search from '../../../SearchComponent/search'
+import AddButton from "../../../ButtonComponent/add"
+import DeleteButton from "../../../ButtonComponent/deleteButton"
+import UpdateButton from "../../../ButtonComponent/update"
+import { getRoom } from '../../../../Services/ComputerManagement'
+import { createRoom } from '../../../../Services/ComputerManagement'
+import { updateRoom } from '../../../../Services/ComputerManagement'
+import { deleteRoom } from '../../../../Services/ComputerManagement'
+import AddRoomForm from '../AddComponent/addcomputer';
 
 
 
@@ -89,11 +89,17 @@ const management = () => {
                 <p className="title">Quản lý phòng máy</p>
 
                 <div className="table">
-                    <div className="computer-button">
+                    {/* <div className="computer-button">
                         <div className="button">
                             <AddButton onClick={() => setShowAddForm(true)} />
                         </div>
+                    </div> */}
+                    <div className="table-label">
+                        <h3>Danh sách phòng</h3>
+                        <button type="button" onClick={() => setShowAddForm(true)} className="create-room-button">+ Thêm</button>
+                        
                     </div>
+                    
 
                     <table className="room-table">
                         <thead>
@@ -124,6 +130,7 @@ const management = () => {
                             ))}
                         </tbody>
                     </table>
+
                 </div>
             </div>
 
