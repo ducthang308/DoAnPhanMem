@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import './ManageComputer.css';
+import './StartComputer.css';
 import { getAllRoom, getRoom } from '../../../../Services/ComputerManagement'
 import { createComputer, getComputersByRoomId } from '../../../../Services/ComputerService';
 import type { IRoom, IComputer, IComputerDTO } from '../../../../Types/interface.ts';
 import { Link } from 'react-router';
 import { IconFamily } from '@fortawesome/fontawesome-svg-core';
-import AddComputerForm from '../ComputerEditComponent/ComputerEdit';
+// import AddComputerForm from '../ComputerEditComponent/ComputerEdit';
 
 const ManageComputer = () => {
     const [rooms, setRooms] = useState<IRoom[]>([]);
@@ -95,7 +95,7 @@ const ManageComputer = () => {
 
             <div className="computer-grid">
                 {computers.map(computer => (
-                    <Link to={`./detail?id=${computer.id}`} className='computer'>
+                    <Link to={`./computer-selected?id=${computer.id}`} className='computer'>
                         <div className="computer-item" key={computer.id}>
 
                             Máy<br />{computer.computerName}
@@ -108,15 +108,8 @@ const ManageComputer = () => {
                 {/* <button className="btn btn-view">Xem</button>
                 <button className="btn btn-edit">Thêm</button>
                 <button className="btn btn-delete">Xóa</button> */}
-                <button type="button" onClick={() => setAddComputerForm(true)} className="btn btn-update" >Thêm</button>
+                {/* <button type="button" onClick={() => setAddComputerForm(true)} className="btn btn-update" >Thêm</button> */}
             </div>
-            {addComputerForm && (
-                <AddComputerForm
-                    initialData={{}}
-                    onClose={() => setAddComputerForm(false)}
-                    onSubmit={(formData) => { handleAddComputer(Number(selectedRoomId), formData) }}
-                />
-            )}
         </div>
 
     );

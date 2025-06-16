@@ -1,4 +1,4 @@
-import { ISchedule, IScheduleChange, IScheduleChangeDTO } from 'src/Types/interface';
+import { ISchedule, IScheduleChange, IScheduleChangeDTO, IStudentSchedule } from 'src/Types/interface';
 import axiosClient from './axiosClient';
 import { createPath } from 'react-router';
 import Schedule from 'src/Component/ContentComponent/ScheduleComponent';
@@ -6,6 +6,16 @@ import Schedule from 'src/Component/ContentComponent/ScheduleComponent';
 export const getPracticeSchedule = async (): Promise<ISchedule[]> => {
     try {
         const response = await axiosClient.get<ISchedule[]>(`/api/v1/schedule/getByUser`);
+        return response.data;
+    } catch (error) {
+        console.error('Lỗi lấy dữ liệu LHP:', error);
+        throw error;
+    }
+}
+
+export const getStudentPracticeSchedule = async (): Promise<IStudentSchedule[]> => {
+    try {
+        const response = await axiosClient.get<IStudentSchedule[]>(`/api/v1/class/getByStudent`);
         return response.data;
     } catch (error) {
         console.error('Lỗi lấy dữ liệu LHP:', error);

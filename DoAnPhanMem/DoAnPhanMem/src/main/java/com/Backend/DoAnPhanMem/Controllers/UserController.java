@@ -78,7 +78,7 @@ public class UserController {
     @GetMapping("/teachers")
     @PreAuthorize("hasRole('ROLE_Training_Officer')")
     public ResponseEntity<List<Map<String, Object>>> getTeachers() {
-        List<Users> teachers = userService.getUsersByRoleName("Teacher");
+        List<Users> teachers = userService.getUsersByRoleName("Lecturer");
 
         List<Map<String, Object>> result = teachers.stream()
                 .map(u -> Map.<String, Object>of(

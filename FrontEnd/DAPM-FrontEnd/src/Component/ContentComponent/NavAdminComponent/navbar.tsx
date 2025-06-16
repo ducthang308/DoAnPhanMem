@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import type { LoginResponse } from 'src/Types/interface'
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import "./index.css"
 import Logo from "../../../assets/images/logo.png"
 
 const navbar = () => {
     const [user, setUser] = useState<LoginResponse | null>(null);
     const [loading, setLoading] = useState(true);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchUser = async () => {
@@ -38,8 +40,6 @@ const navbar = () => {
         fetchUser();
     }, []);
 
-
-    const navigate = useNavigate();
     const handleLogout = () => {
         localStorage.removeItem('user');      // Xóa user
         setUser(null);                        // Reset state
@@ -58,9 +58,10 @@ const navbar = () => {
             <div className="menu">
                 <nav>
                     <Link to="/profile">Thông tin cá nhân</Link>
-                    <Link to="/duty_schedule/schedule">Quản lý lịch trực</Link>
-                    <Link to="/duty_schedule/room">Quản lý sơ đồ phòng thực hành</Link>
-                    {/* <Link to="/">Đăng xuất</Link> */}
+                    {/* <Link to="/it-officer/duty_schedule/schedule">Quản lý lịch trực</Link> */}
+                    {/* <Link to="/duty_schedule/room">Quản lý sơ đồ phòng thực hành</Link> */}
+                    {/* <Link to="/it-officer/computers/">Quản lý máy tính</Link> */}
+                    {/* <Link to="/it-officer/room-class/">Cập nhật phòng Lớp học phần</Link> */}
                     <a onClick={handleLogout} style={{ cursor: 'pointer' }}>Đăng xuất</a>
                 </nav>
             </div>

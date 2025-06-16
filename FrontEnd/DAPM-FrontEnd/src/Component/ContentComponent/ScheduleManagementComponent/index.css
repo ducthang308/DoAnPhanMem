@@ -55,7 +55,7 @@ th, td {
     font-size: 14px;
 }
 
-th {
+.table-wrapper th {
     background-color: #3498db;
     color: rgb(0, 0, 0);
     font-weight: bold;

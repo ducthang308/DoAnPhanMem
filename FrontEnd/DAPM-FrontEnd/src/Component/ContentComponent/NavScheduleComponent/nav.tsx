@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import type { LoginResponse } from 'src/Types/interface'
 import './nav.css';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Logo from "/src/assets/images/logo.png"
 const NavSchedule = () => {
   const [user, setUser] = useState<LoginResponse | null>(null);
@@ -36,6 +36,14 @@ const NavSchedule = () => {
 
     fetchUser();
   }, []);
+
+  const navigate = useNavigate();
+  const handleLogout = () => {
+    localStorage.removeItem('user');      // Xóa user
+    setUser(null);                        // Reset state
+    navigate("/", { replace: true });     // Điều hướng, không cho quay lại
+  };
+
   return (
     <div className="content-navbar">
       <div className="profile">
@@ -50,7 +58,8 @@ const NavSchedule = () => {
         <Link to="/schedule">Quản lý lớp thực hành</Link>
         {/* <Link to="/schedule/change">Yêu cầu đổi lịch</Link> */}
         <Link to="/schedule/request-approval">Duyệt yêu cầu đổi lịch</Link>
-        <Link to="/">Đăng xuất</Link>
+        {/* <Link to="/">Đăng xuất</Link> */}
+        <a onClick={handleLogout} style={{ cursor: 'pointer' }}>Đăng xuất</a>
       </div>
     </div>
   );

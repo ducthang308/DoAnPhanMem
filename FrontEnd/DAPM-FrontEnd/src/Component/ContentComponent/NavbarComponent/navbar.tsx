@@ -61,6 +61,7 @@ const navbar = () => {
                     <Link to="/it-officer/duty_schedule/schedule">Quản lý lịch trực</Link>
                     {/* <Link to="/duty_schedule/room">Quản lý sơ đồ phòng thực hành</Link> */}
                     <Link to="/it-officer/computers/">Quản lý máy tính</Link>
+                    <Link to="/it-officer/room-class/">Cập nhật phòng Lớp học phần</Link>
                     <a onClick={handleLogout} style={{ cursor: 'pointer' }}>Đăng xuất</a>
                 </nav>
             </div>

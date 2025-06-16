@@ -22,7 +22,7 @@ public class SemesterController {
     private final SemesterService semesterService;
 
     @GetMapping("")
-    @PreAuthorize("hasRole('ROLE_Training_Officer')")
+    @PreAuthorize("hasAnyRole('ROLE_Training_Officer', 'ROLE_Admin_IT_Officer', 'ROLE_Addmin', 'ROLE_IT_Officer')")
     public ResponseEntity<List<Map<String, Object>>> getAllSemesters() {
         List<Semester> semesters = semesterService.getAllSemesters();
 

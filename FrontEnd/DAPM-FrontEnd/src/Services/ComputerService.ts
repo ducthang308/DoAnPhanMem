@@ -1,5 +1,5 @@
 import axiosClient from './axiosClient';
-import { IComputerDTO, IMaintenanceDTO, IMaintenanceHistory, IRepairDTO, IRepairHistory, ISoftwareDTO, ISoftwareHistory, type IComputer } from '../Types/interface';
+import { IComputerDTO, IMaintenanceDTO, IMaintenanceHistory, IRepairDTO, IRepairHistory, ISoftwareDTO, ISoftwareHistory, IUsageComputer, type IComputer } from '../Types/interface';
 import { createPath } from 'react-router';
 
 export const getComputersByRoomId = async (roomId: number): Promise<IComputer[]> => {
@@ -72,6 +72,16 @@ export const deleteComputer = async (id: number) => {
         return response.data;
     } catch (error: any) {
         throw new Error(error.message);
+    }
+}
+
+export const getUsageHistoryByComputerID = async (computerId: number): Promise<IUsageComputer[]> => {
+    try {
+        const response = await axiosClient.get<IUsageComputer[]>(`/api/v1/usage/getByComputer/${computerId}`);
+        return response.data;
+    } catch (error) {
+        console.error(error);
+        throw error;
     }
 }
 
@@ -215,6 +225,26 @@ export const updateSoftwareHistory = async (id: number, software: ISoftwareDTO) 
 export const deleteSoftwareHistory = async (id: number) => {
     try {
         const response = await axiosClient.delete(`api/v1/software/${id}`);
+        return response.data;
+    } catch (error: any) {
+        throw new Error(error.message);
+    }
+}
+
+export const startComputer = async (id: number) => {
+    try {
+        const response = await axiosClient.post(`api/v1/usage`, {
+            computerId: id
+        });
+        return response.data;
+    } catch (error: any) {
+        throw new Error(error.message);
+    }
+}
+
+export const stopComputer = async (id: number) => {
+    try {
+        const response = await axiosClient.put(`api/v1/usage/${id}`);
         return response.data;
     } catch (error: any) {
         throw new Error(error.message);

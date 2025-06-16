@@ -1,4 +1,5 @@
 .computer-detail {
+    width: 680px;
     max-width: 860px;
     margin: 0 auto;
     padding: 20px;
@@ -69,12 +70,34 @@ table th {
     border-radius: 4px;
 }
 
+.start-button {
+    background-color: green;
+    font-weight: bold;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    float: right;
+    border-radius: 4px;
+}
+
+.stop-button {
+    background-color: red;
+    font-weight: bold;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    float: right;
+    border-radius: 4px;
+}
+
 .table-label {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-.table-change th {
+.table-usage th {
     color: black;
 }

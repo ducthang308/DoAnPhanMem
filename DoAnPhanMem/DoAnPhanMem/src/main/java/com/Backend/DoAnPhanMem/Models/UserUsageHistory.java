@@ -3,6 +3,7 @@ package com.Backend.DoAnPhanMem.Models;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Data
@@ -26,8 +27,11 @@ public class UserUsageHistory {
     @JoinColumn(name = "users_id")
     private Users user;
 
-    @Column(name = "usage_date", nullable = false)
-    private Date usageDate;
+    @Column(name = "start_at")
+    private LocalDateTime startAt;
+
+    @Column(name = "end_at")
+    private LocalDateTime endAt;
 
     @Column(name = "notes", nullable = false)
     private String notes;

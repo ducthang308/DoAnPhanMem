@@ -20,6 +20,8 @@ const LoginForm: React.FC = () => {
             localStorage.setItem("user", JSON.stringify(data));
             if (data.roles_id === 1) {
                 navigate('/home');
+            } else if (data.roles_id === 6) {
+                navigate('/class');
             } else if (data.roles_id === 5) {
                 navigate('/schedule/change');
             } else if (data.roles_id === 4) {

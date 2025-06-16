@@ -35,7 +35,7 @@ interface Semester {
 }
 
 const UpdateRoom = () => {
-  const API_BASE_URL = 'http://localhost:8088/api/v1/lab';
+  const API_BASE_URL = 'http://localhost:8080/api/v1';
   const navigate = useNavigate();
   const location = useLocation();
   const state = location.state as { roomData: RoomItem[]; semesterId: number; thu: string; fromPeriod: number; toPeriod: number } | undefined;
@@ -58,10 +58,10 @@ const UpdateRoom = () => {
       }
       try {
         const [roomOptions, semestersRes] = await Promise.all([
-          axios.get(`${API_BASE_URL}/rooms`, {
+          axios.get(`${API_BASE_URL}/room`, {
             headers: { Authorization: `Bearer ${token}` }
           }),
-          axios.get(`http://localhost:8088/api/v1/duty_schedule/semesters`, {
+          axios.get(`http://localhost:8080/api/v1/duty_schedule/semesters`, {
             headers: { Authorization: `Bearer ${token}` }
           }),
         ]);
@@ -87,7 +87,7 @@ const UpdateRoom = () => {
   }, [roomOptions]);
 
   const handleCancelClick = () => {
-    navigate('/duty_schedule/room');
+    navigate('/it-officer/room-class/');
   };
 
   const handleSaveClick = async () => {
@@ -108,11 +108,11 @@ const UpdateRoom = () => {
     }
 
     try {
-      await axios.put(`${API_BASE_URL}/update-rooms-bulk`, payload, {
+      await axios.put(`${API_BASE_URL}/lab/update-rooms-bulk`, payload, {
         headers: { Authorization: `Bearer ${token}` },
       });
       alert("Đã cập nhật phòng thành công");
-      navigate('/duty_schedule/room');
+      navigate('/it-officer/room-class/');
     } catch (error) {
       console.error("Lỗi khi cập nhật phòng:", error);
       alert("Không thể cập nhật phòng. Vui lòng thử lại.");

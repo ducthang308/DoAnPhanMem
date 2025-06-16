@@ -1,0 +1,133 @@
+.manage-computer {
+    background-color: #ffffff;
+    padding: 30px 40px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    width: 840px;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.header {
+    margin-bottom: 20px;
+}
+
+.search {
+    width: 200px;
+    padding: 5px;
+    margin-bottom: 10px;
+}
+
+.room {
+    margin-top: 10px;
+}
+
+.computer-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+    gap: 10px;
+}
+
+.computer-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80px;
+    width: 80px;
+    background-color: #4CAF50;
+    color: white;
+    border-radius: 6px;
+    font-weight: bold;
+}
+
+.action-button {
+    text-align: center;
+    padding: 10px 0;
+    border-radius: 5px;
+    color: black;
+    font-weight: bold;
+}
+
+.view {
+    background-color: #FFD700;
+}
+
+.edit {
+    background-color: #FFA500;
+}
+
+.delete {
+    background-color: #FF6347;
+}
+
+.update {
+    background-color: #00FF00;
+}
+
+.empty-slot {
+    background-color: #e0e0e0;
+    border-radius: 5px;
+    position: relative;
+}
+
+.add-button {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: transparent;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.input-select {
+    width: 80px;
+    height: 40px;
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    background-color: white;
+    cursor: pointer;
+    transition: border-color 0.2s;
+}
+
+.button-group {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.btn-view {
+    background-color: orange;
+}
+
+.btn-edit {
+    background-color: yellow;
+    color: black;
+}
+
+.btn-delete {
+    background-color: red;
+}
+
+.btn-update {
+    background-color: green;
+}
+
+.computer {
+    text-decoration: none;
+}

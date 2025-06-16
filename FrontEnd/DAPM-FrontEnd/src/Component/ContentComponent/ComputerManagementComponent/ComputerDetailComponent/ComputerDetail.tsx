@@ -1,8 +1,8 @@
 import React, { useState, useEffect, DO_NOT_USE_OR_YOU_WILL_BE_FIRED_EXPERIMENTAL_FORM_ACTIONS } from "react";
 import { useNavigate } from 'react-router-dom';
 import "./ComputerDetail.css"
-import { getComputerById, getMaintenanceByComputerID, updateMaintenanceHistory, deleteMaintenanceHistory, getRepairByComputerID, createRepairHistory, deleteRepairHistory, updateRepairHistory, getSoftwareByComputerID, createSoftwareHistory, updateSoftwareHistory, deleteSoftwareHistory, updateComputer, deleteComputer } from "../../../../Services/ComputerService";
-import { IComputer, IComputerDTO, IMaintenanceDTO, IMaintenanceHistory, IRepairDTO, IRepairHistory, ISoftwareDTO, ISoftwareHistory } from "src/Types/interface";
+import { getComputerById, getMaintenanceByComputerID, updateMaintenanceHistory, deleteMaintenanceHistory, getRepairByComputerID, createRepairHistory, deleteRepairHistory, updateRepairHistory, getSoftwareByComputerID, createSoftwareHistory, updateSoftwareHistory, deleteSoftwareHistory, updateComputer, deleteComputer, getUsageHistoryByComputerID } from "../../../../Services/ComputerService";
+import { IComputer, IComputerDTO, IMaintenanceDTO, IMaintenanceHistory, IRepairDTO, IRepairHistory, ISoftwareDTO, ISoftwareHistory, IUsageComputer } from "src/Types/interface";
 import { createMaintenanceHistory } from "../../../../Services/ComputerService";
 import AddMaintenanceForm from "./AddMaintenanceComponent/AddMaintenance";
 import DeleteButton from '../../../ButtonComponent/deleteButton'
@@ -19,6 +19,17 @@ const ComputerDetail = () => {
     const [maintenaces, setMaintenances] = useState<IMaintenanceHistory[]>([]);
     const urlParams = new URLSearchParams(window.location.search);
     const id = Number(urlParams.get('id'));
+
+    const [usageComputers, setUsageComputers] = useState<IUsageComputer[]>([]);
+
+    const getUsageComputer = async (id) => {
+        try {
+            const usageComputers = await getUsageHistoryByComputerID(id);
+            setUsageComputers(usageComputers);
+        } catch (error: any) {
+            console.error(error.message);
+        }
+    }
 
     const fetchData = async (id) => {
         try {
@@ -64,6 +75,7 @@ const ComputerDetail = () => {
         getMaintenance(id);
         getRepair(id);
         getSoftware(id);
+        getUsageComputer(id);
     }, []);
 
     const navigate = useNavigate();
@@ -254,8 +266,10 @@ const ComputerDetail = () => {
             </div> */}
             <div className="table-label">
                 <h3>Thông tin chung</h3>
-                <button type="button" onClick={() => setShowAddComputerForm(true)} className="create-button">Cập nhật</button>
-                <button type="button" onClick={() => handleDeleteComputer(id)} className="close-button">Xoá</button>
+                <div>
+                    <button type="button" onClick={() => setShowAddComputerForm(true)} className="create-detail-button">Cập nhật</button>
+                    <button type="button" onClick={() => handleDeleteComputer(id)} className="close-button">Xoá</button>
+                </div>
             </div>
             <div className="general-info">
                 <div><strong>Ngày hoạt động:</strong>&emsp;{computer?.usageDate?.split("T")[0]}</div>
@@ -272,7 +286,7 @@ const ComputerDetail = () => {
 
             <div className="table-label">
                 <h3>Lịch sử cài đặt phần mềm</h3>
-                <button type="button" onClick={() => openAddSoftwareForm()} className="create-button">+</button>
+                <button type="button" onClick={() => openAddSoftwareForm()} className="create-detail-button">+</button>
             </div>
             <table>
                 <thead>
@@ -310,7 +324,7 @@ const ComputerDetail = () => {
 
             <div className="table-label">
                 <h3>Lịch sử sửa chữa</h3>
-                <button type="button" onClick={() => openAddRepairForm()} className="create-button">+</button>
+                <button type="button" onClick={() => openAddRepairForm()} className="create-detail-button">+</button>
             </div>
             <table>
                 <thead>
@@ -352,7 +366,7 @@ const ComputerDetail = () => {
 
             <div className="table-label">
                 <h3>Lịch sử bảo trì</h3>
-                <button type="button" onClick={() => openAddForm()} className="create-button">+</button>
+                <button type="button" onClick={() => openAddForm()} className="create-detail-button">+</button>
 
             </div>
             <table>
@@ -394,38 +408,32 @@ const ComputerDetail = () => {
                 </tbody>
             </table>
 
-
-            {/* <div className="table-label">
+            <div className="table-label">
                 <h3>Lịch sử người dùng</h3>
-                <button type="button" onClick={handleClick} className="create-button">+</button>
+                {/* <button type="button" onClick={() => openAddSoftwareForm()} className="create-detail-button">+</button> */}
             </div>
             <table>
                 <thead>
                     <tr>
-                        <th>Giờ hoạt động</th>
-                        <th>Ngày hoạt động</th>
+                        <th>Ngày sử dụng</th>
                         <th>Người sử dụng</th>
+                        <th>Giờ bắt đầu</th>
+                        <th>Giờ kết thúc</th>
                         <th>Ghi chú</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>08:09:21</td>
-                        <td>25/02/2019</td>
-                        <td>Nguyễn Văn Bảo</td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>14:03:51</td>
-                        <td>29/03/2020</td>
-                        <td>Trần Văn Lợi</td>
-                        <td>Xảy ra lỗi</td>
-                    </tr>
+                    {usageComputers.map(usageComputer => (
+                        <tr>
+                            <td>{usageComputer?.startAt.split("T")[0] || ''}</td>
+                            <td>{usageComputer?.user.fullName || ''}</td>
+                            <td>{usageComputer?.startAt.split("T")[1] || ''}</td>
+                            <td>{usageComputer?.endAt ? usageComputer.endAt.split("T")[1] : ''}</td>
+                            <td>{usageComputer?.notes || ''}</td>
+                        </tr>
+                    ))}
                 </tbody>
-            </table> */}
-
-            {/* <button type="button" onClick={handleClick} className="close-button">Cập nhật</button> */}
-
+            </table>
             {showAddMaintenanceForm && (
                 <AddMaintenanceForm
                     initialData={selectedMaintenance ?? undefined}
@@ -476,7 +484,7 @@ const ComputerDetail = () => {
                     }}
                 />
             )
-                
+
             }
         </div>
     );

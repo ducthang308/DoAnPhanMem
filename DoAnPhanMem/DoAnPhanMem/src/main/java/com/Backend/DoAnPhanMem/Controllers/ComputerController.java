@@ -45,7 +45,7 @@ public class ComputerController {
     }
 
     @GetMapping("/{id}")
-    @PreAuthorize("hasAnyRole('ROLE_Admin_IT_Officer', 'ROLE_IT_Officer')")
+    @PreAuthorize("hasAnyRole('ROLE_Admin_IT_Officer', 'ROLE_IT_Officer', 'ROLE_Student')")
     public ResponseEntity<?> getComputer(@PathVariable Long id) {
         Optional<Computer> computer = this.computerRepository.findById(id);
         if (computer.isPresent()) {
@@ -61,7 +61,7 @@ public class ComputerController {
     }
 
     @GetMapping("/getByRoom/{idRoom}")
-    @PreAuthorize("hasAnyRole('ROLE_Admin_IT_Officer', 'ROLE_IT_Officer')")
+    @PreAuthorize("hasAnyRole('ROLE_Admin_IT_Officer', 'ROLE_IT_Officer', 'ROLE_Student')")
     public ResponseEntity<?> getComputersByRoomId(@PathVariable Long idRoom) {
         List<Computer> computers = this.computerRepository.findByRoom_id(idRoom);
         return ResponseEntity.ok(computers);
