@@ -34,6 +34,8 @@ const AppRouter = () => {
       <Route path="/it-officer/*" element={<HomeLayout />} />
 
       <Route path="/schedule/*" element={<HomeLayout />} />
+
+      <Route path="/class/*" element={<HomeLayout />} />
     </Routes>
   );
 };

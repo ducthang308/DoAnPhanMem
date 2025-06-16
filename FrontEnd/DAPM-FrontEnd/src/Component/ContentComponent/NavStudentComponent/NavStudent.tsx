@@ -1,14 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import type { LoginResponse } from 'src/Types/interface'
+import './NavStudent.css';
 import { Link, useNavigate } from 'react-router-dom';
-import "./index.css"
-import Logo from "../../../assets/images/logo.png"
-
-const navbar = () => {
+import Logo from "/src/assets/images/logo.png"
+const NavSchedule = () => {
     const [user, setUser] = useState<LoginResponse | null>(null);
     const [loading, setLoading] = useState(true);
 
-    
     useEffect(() => {
         const fetchUser = async () => {
             const userStr = localStorage.getItem('user');
@@ -39,14 +37,13 @@ const navbar = () => {
         fetchUser();
     }, []);
 
-    
     const navigate = useNavigate();
     const handleLogout = () => {
         localStorage.removeItem('user');      // Xóa user
         setUser(null);                        // Reset state
         navigate("/", { replace: true });     // Điều hướng, không cho quay lại
     };
-
+    
     return (
         <div className="content-navbar">
             <div className="profile">
@@ -57,16 +54,15 @@ const navbar = () => {
                 </div>
             </div>
             <div className="menu">
-                <nav>
-                    <Link to="/profile">Thông tin cá nhân</Link>
-                    <Link to="/duty_schedule/schedule">Quản lý lịch trực</Link>
-                    <Link to="/duty_schedule/room">Quản lý sơ đồ phòng thực hành</Link>
-                    {/* <Link to="/">Đăng xuất</Link> */}
-                    <a onClick={handleLogout} style={{ cursor: 'pointer' }}>Đăng xuất</a>
-                </nav>
+                <Link to="/profile">Thông tin cá nhân</Link>
+                {/* <Link to="/schedule">Quản lý lớp thực hành</Link> */}
+                <Link to="/class">Thời khoá biểu</Link>
+                <Link to="/class/start-computer">Chọn máy tính</Link>
+                {/* <Link to="/request-approval">Duyệt yêu cầu đổi lịch</Link> */}
+                {/* <Link to="/">Đăng xuất</Link> */}
+                <a onClick={handleLogout} style={{ cursor: 'pointer' }}>Đăng xuất</a>
             </div>
         </div>
-    )
+    );
 }
-
-export default navbar
+export default NavSchedule;

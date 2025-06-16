@@ -50,7 +50,7 @@ const ApprovalChangeSchedule = () => {
                 <div>Máy <span className="info-box">05</span></div>
             </div> */}
 
-            <table>
+            <table className="table-change">
                 <thead>
                     <tr>
                         <th>Lớp học phần</th>

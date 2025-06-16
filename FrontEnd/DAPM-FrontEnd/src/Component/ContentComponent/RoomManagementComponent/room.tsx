@@ -30,7 +30,7 @@ interface Semester {
 }
 
 const Room = () => {
-  const API_BASE_URL = 'http://localhost:8088/api/v1/lab';
+  const API_BASE_URL = 'http://localhost:8080/api/v1/lab';
   const navigate = useNavigate();
 
   const [semesterId, setSemesterId] = useState<number | ''>('');
@@ -56,7 +56,7 @@ const Room = () => {
     setIsLoading(true);
     setError(null);
     try {
-      const response = await axios.get(`http://localhost:8088/api/v1/duty_schedule/semesters`, {
+      const response = await axios.get(`http://localhost:8080/api/v1/duty_schedule/semesters`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setSemesterList(response.data);
@@ -147,7 +147,7 @@ const Room = () => {
   }, [semesterId, thu, fromPeriod, toPeriod]);
 
   const handleUpdateClick = (roomData: RoomItem[]) => {
-    navigate('/duty_schedule/update-room', { state: { roomData, semesterId, thu, fromPeriod, toPeriod } });
+    navigate('/it-officer/duty_schedule/update-room', { state: { roomData, semesterId, thu, fromPeriod, toPeriod } });
   };
   const handleSemesterIdChange = (value: string) => {
     if (value === "") {
@@ -279,7 +279,7 @@ const Room = () => {
           </div>
         )}
         <div className="center">
-          <button className="btn-update" onClick={() => handleUpdateClick(roomData)}>Cập nhật</button>
+          <button className="btn-update-room" onClick={() => handleUpdateClick(roomData)}>Cập nhật</button>
         </div>
       </div>
     </div>

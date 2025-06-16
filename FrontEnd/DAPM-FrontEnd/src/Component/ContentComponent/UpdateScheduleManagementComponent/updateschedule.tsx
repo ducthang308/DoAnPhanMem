@@ -27,7 +27,7 @@ interface Semester {
 }
 
 const UpdateSchedule: React.FC = () => {
-    const API_BASE_URL = 'http://localhost:8088/api/v1/duty_schedule';
+    const API_BASE_URL = 'http://localhost:8080/api/v1/duty_schedule';
     const location = useLocation();
     const state = location.state as { scheduleData: ScheduleItem[], semesterId: number, tuan: number } | undefined;
     const [scheduleData, setScheduleData] = useState<ScheduleItem[]>([]);
@@ -106,7 +106,7 @@ const UpdateSchedule: React.FC = () => {
 
     const handleCancelClick = () => {
         if (window.confirm("Bạn có chắc chắn muốn hủy không?")) {
-            navigate('/duty_schedule/schedule');
+            navigate('/it-officer/duty_schedule/schedule');
         }
     };
 
@@ -134,7 +134,7 @@ const UpdateSchedule: React.FC = () => {
             });
 
             alert("Đã lưu lịch trực thành công");
-            navigate('/duty_schedule/schedule');
+            navigate('/it-officer/duty_schedule/schedule');
         } catch (error) {
             console.error("Lỗi khi lưu lịch trực:", error);
             alert("Không thể lưu lịch trực. Vui lòng thử lại.");

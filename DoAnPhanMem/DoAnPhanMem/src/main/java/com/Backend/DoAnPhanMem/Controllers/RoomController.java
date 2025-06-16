@@ -35,7 +35,7 @@ public class RoomController {
     }
 
     @GetMapping("")
-    @PreAuthorize("hasAnyRole('ROLE_Admin', 'ROLE_Admin_IT_Officer', 'ROLE_IT_Officer')")
+    @PreAuthorize("hasAnyRole('ROLE_Admin', 'ROLE_Admin_IT_Officer', 'ROLE_IT_Officer', 'ROLE_Student')")
     public ResponseEntity<List<Room>> getAllRoom(@RequestParam(defaultValue = "") String keyword){
         List<Room> rooms = roomService.getAllRoom(keyword);
         return ResponseEntity.ok(rooms);

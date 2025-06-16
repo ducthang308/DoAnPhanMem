@@ -47,7 +47,7 @@ table th {
     background-color: #f0f0f0;
 }
 
-.create-button {
+/* .create-button {
     background-color: green;
     font-weight: bold;
     color: white;
@@ -56,7 +56,7 @@ table th {
     cursor: pointer;
     float: right;
     border-radius: 4px;
-}
+} */
 
 .close-button {
     background-color: red;
@@ -69,8 +69,31 @@ table th {
     border-radius: 4px;
 }
 
+.create-detail-button {
+    background-color: green;
+    font-weight: bold;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    float: right;
+    border-radius: 4px;
+}
+
 .table-label {
+    margin-top: 50px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: end;
+}
+
+.table-label div {
+    width: 180px;
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: end;
+}
+
+.computer-detail th {
+    color: black;
 }

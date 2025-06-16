@@ -1,8 +1,42 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react';
 import "./index.css"
 import Logo from '../../assets/images/logo.png'
+import type { LoginResponse } from 'src/Types/interface'
 
 const index = () => {
+    const [user, setUser] = useState<LoginResponse | null>(null);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const fetchUser = async () => {
+            const userStr = localStorage.getItem('user');
+            if (!userStr) {
+                console.error('Không tìm thấy user trong localStorage');
+                setLoading(false);
+                return;
+            }
+
+            try {
+                const userObj = JSON.parse(userStr);
+                const userId = userObj.id;
+                const name = userObj.fullName;
+                if (!userId) {
+                    console.error('user_id không tồn tại trong dữ liệu user');
+                    setLoading(false);
+                    return;
+                }
+
+                setUser(userObj);
+            } catch (error) {
+                console.error('Lỗi khi load thông tin người dùng:', error);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchUser();
+    }, []);
+
     return (
         <div className="header">
             <div className="container">
@@ -34,7 +68,7 @@ const index = () => {
                             <li className="header-item">
                                 <a className="item-link">
                                     <i className="fa-solid fa-right-to-bracket item-icon"></i>
-                                    Đăng nhập
+                                    {loading ? null : user?.full_name || 'Đăng nhập'}
                                 </a>
                             </li>
                         </ul>

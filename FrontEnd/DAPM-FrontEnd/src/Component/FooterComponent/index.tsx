@@ -8,7 +8,7 @@ const index = () => {
                 <div className="container-content">
                     <div className="information">
                         <div className="address">
-                            <p className="title">
+                            <p className="title-text">
                                 TRƯỜNG ĐẠI HỌC SƯ PHẠM KỸ THUẬT
                             </p>
                             <ul className="footer-list">
@@ -26,7 +26,7 @@ const index = () => {
                             </ul>
                         </div>
                         <div className="contact">
-                            <p className="title">
+                            <p className="title-text">
                                 THÔNG TIN LIÊN LẠC
                             </p>
                             <ul className="footer-list">
@@ -42,7 +42,7 @@ const index = () => {
                         </div>
                     </div>
                     <div className="social">
-                        <p className="title title-center">
+                        <p className="title-text title-center">
                             KẾT NỐI
                         </p>
                         <ul className="social-list social-circle">

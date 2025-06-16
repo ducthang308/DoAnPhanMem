@@ -193,6 +193,19 @@ export interface ISchedule {
     room: IRoom
 }
 
+export interface IStudentSchedule {
+    id: number;
+    classCode: string;
+    subject: string;
+    date: number;
+    fromPeriod: number;
+    toPeriod: number;
+    lecturerName: string;
+    roomName: string;
+    effectiveDate: string;
+    notes: string
+}
+
 export interface IScheduleChange {
     id: number;
     newDate: number;
@@ -211,4 +224,16 @@ export interface IScheduleChangeDTO {
     newToPeriod: number;
     reason: string;
     practiceScheduleId: number;
+}
+
+export interface IStartComputerDTO {
+    computerId: number;
+}
+
+export interface IUsageComputer {
+    id: number;
+    user: IUser;
+    startAt: string;
+    endAt: string;
+    notes: string;
 }

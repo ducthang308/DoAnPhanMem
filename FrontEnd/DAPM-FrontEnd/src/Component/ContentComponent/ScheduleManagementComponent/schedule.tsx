@@ -25,7 +25,7 @@ interface Semester {
 const Schedule = () => {
     const navigate = useNavigate();
     const handleUpdate = (scheduleData: ScheduleItem[]) => {
-        navigate('/duty_schedule/update-schedule', { state: { scheduleData, semesterId, tuan } });
+        navigate('/it-officer/duty_schedule/update-schedule', { state: { scheduleData, semesterId, tuan } });
     };
     const [semesterList, setSemesterList] = useState<Semester[]>([]);
     const [semesterId, setSemesterId] = useState<number | null>(null);
@@ -35,7 +35,7 @@ const Schedule = () => {
     const [error, setError] = useState<string | null>(null);
 
     const days = ["Thứ 2", "Thứ 3", "Thứ 4", "Thứ 5", "Thứ 6", "Thứ 7", "Chủ nhật"];
-    const API_BASE_URL = 'http://localhost:8088/api/v1/duty_schedule';
+    const API_BASE_URL = 'http://localhost:8080/api/v1/duty_schedule';
 
     useEffect(() => {
         const token = localStorage.getItem('token');
