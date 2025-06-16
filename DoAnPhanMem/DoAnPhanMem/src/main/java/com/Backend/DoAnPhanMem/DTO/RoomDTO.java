@@ -11,7 +11,7 @@ import lombok.*;
 @NoArgsConstructor
 @Builder
 public class RoomDTO {
-    @JsonProperty("roomName")
+    @JsonProperty("room_name")
     private String roomName;
 
     @JsonProperty("floors")
