@@ -3,6 +3,11 @@ server:
   tomcat:
     max-http-form-post-size: 10000000
 spring:
+#  datasource:
+#    url: jdbc:sqlserver://localhost:1433;databaseName=ComputerManagement;encrypt=true;trustServerCertificate=true
+#    username: sa
+#    password: 123456
+#    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
   datasource:
     url: jdbc:sqlserver://34.59.38.62:1433;databaseName=ComputerManagement;encrypt=true;trustServerCertificate=true
     username: sqlserver

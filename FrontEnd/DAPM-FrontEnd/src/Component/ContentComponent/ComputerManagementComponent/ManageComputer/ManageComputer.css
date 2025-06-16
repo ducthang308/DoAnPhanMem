@@ -131,3 +131,7 @@
 .computer {
     text-decoration: none;
 }
+
+.form-input select{
+    width: 240px;
+}
