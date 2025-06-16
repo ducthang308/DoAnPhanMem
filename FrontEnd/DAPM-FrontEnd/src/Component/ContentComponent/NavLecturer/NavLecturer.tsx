@@ -43,7 +43,7 @@ const NavSchedule = () => {
         setUser(null);                        // Reset state
         navigate("/", { replace: true });     // Điều hướng, không cho quay lại
     };
-    
+
     return (
         <div className="content-navbar">
             <div className="profile">
