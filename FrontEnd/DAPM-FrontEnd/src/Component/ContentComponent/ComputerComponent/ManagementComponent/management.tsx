@@ -12,8 +12,6 @@ import { updateRoom } from '../../../../Services/ComputerManagement'
 import { deleteRoom } from '../../../../Services/ComputerManagement'
 import AddRoomForm from '../AddComponent/addcomputer';
 
-
-
 const management = () => {
     const [room, setRoom] = useState<IRoom[]>([]);
     const [showAddForm, setShowAddForm] = useState(false);
@@ -97,9 +95,9 @@ const management = () => {
                     <div className="table-label">
                         <h3>Danh sách phòng</h3>
                         <button type="button" onClick={() => setShowAddForm(true)} className="create-room-button">+ Thêm</button>
-                        
+
                     </div>
-                    
+
 
                     <table className="room-table">
                         <thead>
