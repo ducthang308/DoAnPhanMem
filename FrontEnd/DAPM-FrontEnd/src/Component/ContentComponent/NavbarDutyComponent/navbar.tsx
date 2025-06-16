@@ -8,7 +8,6 @@ const navbar = () => {
     const [user, setUser] = useState<LoginResponse | null>(null);
     const [loading, setLoading] = useState(true);
 
-    
     useEffect(() => {
         const fetchUser = async () => {
             const userStr = localStorage.getItem('user');
@@ -39,7 +38,7 @@ const navbar = () => {
         fetchUser();
     }, []);
 
-    
+
     const navigate = useNavigate();
     const handleLogout = () => {
         localStorage.removeItem('user');      // Xóa user
